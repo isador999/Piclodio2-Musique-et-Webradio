@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Piclodio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="{{ STATIC_URL }}/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery  -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Boostrap -->
+    <script src="{{ STATIC_URL }}/dist/js/bootstrap.min.js"></script>
+    <!-- personal js -->
+    <script src="{{ STATIC_URL }}homepage.js"></script>
+  </head>
+  <body>
+    <!-- Header -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <a class="navbar-brand" href="/">Piclodio</a><p class="navbar-text">Home</p>
+        <button style="float: right;margin-right:20px" type="button" class="btn btn-default navbar-btn">Option</button>
+    </nav>
+    
+    <div class="container">
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border"><button style="margin-bottom: 3px" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-refresh"></span></button>  Rpi date and time</legend>
+            <div style="text-align: center">
+                <strong class="text-primary">{{ rpinfo.timenow }}</strong></br>
+                <strong class="text-primary">{{ rpinfo.daydate }}</strong> 
+            </div>    
+        </fieldset>
+        </br>
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border"><a href="/alarmclock/" style="margin-bottom: 3px" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-cog"></span></a>  Alarm clock</legend>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Label</th>
+                        <th>Day of week</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Work</th>
+                        <th>
+                           <div class="row">
+                               <div class="col-xs-1"><span class="text-primary">Mo</span></div>
+                               <div class="col-xs-1"><span class="text-primary">Tu</span></div>
+                               <div class="col-xs-1"><span class="text-primary">We</span></div>
+                               <div class="col-xs-1"><span class="text-primary">Th</span></div>
+                               <div class="col-xs-1"><span class="text-primary">Fr</span></div>
+                               <div class="col-xs-1"><span class="text-muted">Sa</span></div>
+                               <div class="col-xs-1"><span class="text-muted">Su</span></div>
+                           </div>
+                           
+                        </th>
+                        <th>07:00</th>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+      
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border"><a href="/webradio/" style="margin-bottom: 3px" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-cog"></span></a>  Web radio </legend>
+            <p style="text-align: center;"class="lead {% if player.status == True %}text-primary{% endif %}">{{radio.name}}</p>
+            <div class="btn-group btn-group-justified">
+                <a href="/play/{{radio.id}}" id="play" class="btn btn-{% if player.status == True %}primary{% else %}default{% endif %} btn-lg">Play</a>
+                <a href="/stop/" id="stop" class="btn btn-{% if player.status == False %}primary{% else %}default{% endif %} btn-lg">Stop</a>
+            </div>
+        </fieldset>    
+    </div>
+    
+  </body>
+</html>

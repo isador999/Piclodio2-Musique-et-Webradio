@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Piclodio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="{{ STATIC_URL }}/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery  -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Boostrap -->
+    <script src="{{ STATIC_URL }}/dist/js/bootstrap.min.js"></script>
+    <!-- personal js -->
+    <script src="{{ STATIC_URL }}webradio.js"></script>
+  </head>
+  <body>
+    <!-- Header -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <a class="navbar-brand" href="/">Piclodio</a><p class="navbar-text">New Web Radio</p>
+        <button style="float: right;margin-right:20px" type="button" class="btn btn-default navbar-btn">Option</button>
+    </nav>
+    
+    <div class="container">
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border">New web radio</legend>
+            <form role="form" action="/addwebradio/" method="post">{% csrf_token %}
+                  {{ form.non_field_errors }}
+                  <div class="form-group">
+                    {{ form.subject.errors }}  
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" name ="name"id="name" placeholder="My Radio">
+                  </div>
+                  <div class="form-group">
+                    {{ form.subject.errors }}  
+                    <label for="url">URL</label>
+                    <input type="text" name="url" class="form-control" id="url" placeholder="http://url.example">
+                  </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+        </fieldset >   
+           
+    </div>
+    
+  </body>
+</html>

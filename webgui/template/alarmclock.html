@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Piclodio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="{{ STATIC_URL }}/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery  -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Boostrap -->
+    <script src="{{ STATIC_URL }}/dist/js/bootstrap.min.js"></script>
+    <!-- personal js -->
+    <script src="{{ STATIC_URL }}webradio.js"></script>
+  </head>
+  <body>
+    <!-- Header -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <a class="navbar-brand" href="/">Piclodio</a><p class="navbar-text">Alarm clock</p>
+        <button style="float: right;margin-right:20px" type="button" class="btn btn-default navbar-btn">Option</button>
+    </nav>
+    
+    <div class="container">
+         <fieldset class="scheduler-border">
+            <legend class="scheduler-border"><a href="/addalarmclock/" style="margin-bottom: 3px" type="button" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span></a>  Web Radio</legend>
+            <!-- list of saved web radio -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Label</th>
+                        <th>Day of week</th>
+                        <th>Time</th>
+                        <th>Web radio</th>
+                        <th>Active</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for alarmclock in listAlarm %}
+                        <tr>
+                            <th>
+                                {{alarmclock.label}}
+                            </th>
+                            <th>
+                               <div class="col-xs-1"><span class="text-{% if "1" in alarmclock.period  %}primary{% else %}muted{% endif %}">Mo</span></div>                      
+                               <div class="col-xs-1"><span class="text-{% if "2" in alarmclock.period  %}primary{% else %}muted{% endif %}">Tu</span></div>
+                               <div class="col-xs-1"><span class="text-{% if "3" in alarmclock.period  %}primary{% else %}muted{% endif %}">We</span></div>
+                               <div class="col-xs-1"><span class="text-{% if "4" in alarmclock.period  %}primary{% else %}muted{% endif %}">Th</span></div>
+                               <div class="col-xs-1"><span class="text-{% if "5" in alarmclock.period  %}primary{% else %}muted{% endif %}">Fr</span></div>
+                               <div class="col-xs-1"><span class="text-{% if "6" in alarmclock.period  %}primary{% else %}muted{% endif %}">Sa</span></div>
+                               <div class="col-xs-1"><span class="text-{% if "0" in alarmclock.period  %}primary{% else %}muted{% endif %}">Su</span></div>
+                            </th>
+                            <th>
+                                
+                                {% if alarmclock.hour < 10 %}
+                                    0{{alarmclock.hour}}
+                                {% endif %}
+                                :
+                                {% if alarmclock.minute < 10 %}
+                                    0{{alarmclock.minute}}
+                                {% endif %}
+                                
+                            </th>
+                            <th>
+                                {{alarmclock.webradio.name}}
+                            </th>
+                            <th>
+                                <a href="/activeAlarmClock/{{alarmclock.id }}"style="margin-bottom: 3px" type="button" class="btn btn-{% if alarmclock.active == True %}primary{% else %}default{% endif %} btn-sm">
+                                    <span class="glyphicon {% if alarmclock.active == True %}glyphicon-check{% else %}glyphicon-unchecked{% endif %}"></span>
+                                </a> 
+                            </th>
+                            <th>
+                                <a href="/deleteAlarmClock/{{alarmclock.id }}"style="margin-bottom: 3px" type="button" class="btn btn-danger btn-sm">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </a> 
+                            </th>
+                        </tr>
+                    {% empty %}
+                        <p class="lead text-primary">No alarm clock setted yet. </p>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </fieldset >  
+    </div>
+    
+  </body>
+</html>
