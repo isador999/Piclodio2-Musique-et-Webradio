@@ -20,11 +20,6 @@ class Alarmclock(models.Model):
     active =    models.BooleanField()               # is this Alarm Clock active?
     webradio =  models.ForeignKey(Webradio)
     
-# Rpi info
-class Rpinfo():
-    daydate=  strftime("%a, %d %b %Y", time.localtime())
-    timenow = strftime("%X", time.localtime())
-
 
 class Player():
     "Constructor"

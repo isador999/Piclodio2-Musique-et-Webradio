@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*-
 from django.shortcuts import render, redirect
-from webgui.models import Rpinfo, Webradio, Player, Alarmclock
+from webgui.models import Webradio, Player, Alarmclock
 from webgui.forms import WebradioForm
 import time
 
@@ -8,15 +8,13 @@ import time
 #   Show the homepage
 #---------------------------------
 def homepage(request):
-    rpiInfo = Rpinfo()
     try:
         radio = Webradio.objects.get(selected=1)
     except Webradio.DoesNotExist:
         radio = None
     player = Player()
     listalarmclock = Alarmclock.objects.all()
-    return render(request,'homepage.html',{ 'rpinfo': rpiInfo,
-                                            'radio': radio,
+    return render(request,'homepage.html',{ 'radio': radio,
                                             'player': player,
                                             'listalarmclock':listalarmclock })
 

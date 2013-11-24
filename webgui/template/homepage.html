@@ -21,10 +21,11 @@
     
     <div class="container">
         <fieldset class="scheduler-border">
-            <legend class="scheduler-border"><button style="margin-bottom: 3px" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-refresh"></span></button>  Rpi date and time</legend>
+            <legend class="scheduler-border"><a href="/" style="margin-bottom: 3px" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-refresh"></span></a>  Rpi date and time</legend>
             <div style="text-align: center">
-                <strong class="text-primary">{{ rpinfo.timenow }}</strong></br>
-                <strong class="text-primary">{{ rpinfo.daydate }}</strong> 
+                
+                <strong class="text-primary">{% now "H:i" %}</strong></br>
+                <strong class="text-primary">{% now "jS F Y" %}</strong> 
             </div>    
         </fieldset>
         </br>
