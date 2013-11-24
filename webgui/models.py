@@ -1,6 +1,7 @@
 from django.db import models
-from time import gmtime, strftime
+from time import gmtime, strftime, localtime
 import subprocess
+import time
 
 # WebRadio
 class Webradio(models.Model):
@@ -21,8 +22,8 @@ class Alarmclock(models.Model):
     
 # Rpi info
 class Rpinfo():
-    daydate=  strftime("%a, %d %b %Y", gmtime())
-    timenow = strftime("%X", gmtime())
+    daydate=  strftime("%a, %d %b %Y", time.localtime())
+    timenow = strftime("%X", time.localtime())
 
 
 class Player():
