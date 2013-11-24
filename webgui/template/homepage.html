@@ -39,22 +39,33 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th>Work</th>
-                        <th>
-                           <div class="row">
-                               <div class="col-xs-1"><span class="text-primary">Mo</span></div>
-                               <div class="col-xs-1"><span class="text-primary">Tu</span></div>
-                               <div class="col-xs-1"><span class="text-primary">We</span></div>
-                               <div class="col-xs-1"><span class="text-primary">Th</span></div>
-                               <div class="col-xs-1"><span class="text-primary">Fr</span></div>
-                               <div class="col-xs-1"><span class="text-muted">Sa</span></div>
-                               <div class="col-xs-1"><span class="text-muted">Su</span></div>
-                           </div>
-                           
-                        </th>
-                        <th>07:00</th>
-                    </tr>
+                    {% for alarmclock in listalarmclock %}
+                        {% if alarmclock.active == True %}
+                            <tr>
+                                <th>
+                                    {{alarmclock.label}}
+                                </th>
+                                <th>
+                                    <div class="col-xs-1"><span class="text-{% if "1" in alarmclock.period  %}primary{% else %}muted{% endif %}">Mo</span></div>                      
+                                    <div class="col-xs-1"><span class="text-{% if "2" in alarmclock.period  %}primary{% else %}muted{% endif %}">Tu</span></div>
+                                    <div class="col-xs-1"><span class="text-{% if "3" in alarmclock.period  %}primary{% else %}muted{% endif %}">We</span></div>
+                                    <div class="col-xs-1"><span class="text-{% if "4" in alarmclock.period  %}primary{% else %}muted{% endif %}">Th</span></div>
+                                    <div class="col-xs-1"><span class="text-{% if "5" in alarmclock.period  %}primary{% else %}muted{% endif %}">Fr</span></div>
+                                    <div class="col-xs-1"><span class="text-{% if "6" in alarmclock.period  %}primary{% else %}muted{% endif %}">Sa</span></div>
+                                    <div class="col-xs-1"><span class="text-{% if "0" in alarmclock.period  %}primary{% else %}muted{% endif %}">Su</span></div>
+                                 </th>
+                                <th>
+                                    {% if alarmclock.hour < 10 %}
+                                        0{{alarmclock.hour}}
+                                    {% endif %}
+                                    :
+                                    {% if alarmclock.minute < 10 %}
+                                        0{{alarmclock.minute}}
+                                    {% endif %}
+                                </th>
+                            </tr>
+                          {% endif %}  
+                     {% endfor %}
                 </tbody>
             </table>
         </fieldset>

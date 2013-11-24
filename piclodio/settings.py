@@ -85,6 +85,6 @@ STATIC_URL = '/static/'
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    '/home/nico/NetBeansProjects/Piclodio/src/piclodio/webgui/template/'
+    # Don't forget to use absolute paths, not relative paths
+    '/media/nico/Dropbox/Code_Source/Piclodio/src/Piclodio2/webgui/template/'
 )
