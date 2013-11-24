@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Piclodio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="{{ STATIC_URL }}/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery  -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Boostrap -->
+    <script src="{{ STATIC_URL }}/dist/js/bootstrap.min.js"></script>
+    <!-- personal js -->
+    <script src="{{ STATIC_URL }}webradio.js"></script>
+  </head>
+  <body>
+    <!-- Header -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <a class="navbar-brand" href="/">Piclodio</a><p class="navbar-text">New alarm clock</p>
+        <button style="float: right;margin-right:20px" type="button" class="btn btn-default navbar-btn">Option</button>
+    </nav>
+    
+    <div class="container">
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border">New alarm clock</legend>
+            <form class="form-horizontal" role="form">
+                <!-- Set hour and minute -->
+                <div class="form-group">
+                    <label for="time" class="col-sm-2 control-label">Time</label>
+                    <div class="row">
+                        <div class="col-xs-1">
+                            <select class="form-control">
+                                {% for i in rangeHour %}
+                                    <option>
+                                        {% if i < 10 %}
+                                            0{{i}}
+                                        {% else %}
+                                            {{i}}
+                                        {% endif %}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-xs-1">
+                            <select class="form-control">
+                                {% for i in rangeMinute %}
+                                    <option>
+                                        {% if i < 10 %}
+                                            0{{i}}
+                                        {% else %}
+                                            {{i}}
+                                        {% endif %}
+                                    </option>
+                                {% endfor %}
+                             </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Set day of week -->
+                <div class="form-group">
+                    <label for="time" class="col-sm-2 control-label">Day of week</label>
+                    <div class="col-sm-10">
+                        <button type="button" style="width: 50px" class="btn btn-default ">Mo</button>
+                        <button type="button" style="width: 50px" class="btn btn-default ">Tu</button>
+                        <button type="button" style="width: 50px" class="btn btn-default ">We</button>
+                        <button type="button" style="width: 50px" class="btn btn-default ">Th</button>
+                        <button type="button" style="width: 50px" class="btn btn-default ">Fr</button>
+                        <button type="button" style="width: 50px" class="btn btn-default ">Sa</button>
+                        <button type="button" style="width: 50px" class="btn btn-default ">Su</button>
+                    </div>
+                </div>
+                
+                <!-- Set web radio -->
+                <div class="form-group">
+                    <label for="time" class="col-sm-2 control-label">Web radio</label>
+                    <div class="col-sm-4">
+                        <select class="form-control">
+                            {% for radio in listradio %}
+                                <option>{{radio.name }}</option>
+                            {% endfor %} 
+                        </select>
+                    </div>
+                    
+                </div>
+
+                <!-- Automatic put off -->
+                <div class="form-group">
+                    <label for="time" class="col-sm-2 control-label">Automatic snooze</label> 
+                    <div class="col-sm-1">
+                        <select class="form-control">
+                            {% for i in rangeMinute %}
+                                <option>
+                                    {% if i < 10 %}
+                                        0{{i}}
+                                    {% else %}
+                                        {{i}}
+                                    {% endif %}
+                                </option>
+                            {% endfor %}
+                       </select>
+                    </div>
+                    
+                </div>
+
+               <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+                
+            </form>
+            
+        </fieldset > 
+           
+    </div>
+    
+  </body>
+</html>

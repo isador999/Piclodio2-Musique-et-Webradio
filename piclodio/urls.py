@@ -17,4 +17,5 @@ urlpatterns = patterns('',
     url(r'^stop/$','webgui.views.stop'),
     url(r'^alarmclock/$','webgui.views.alarmclock'),
     url(r'^activeAlarmClock/(\d+)/$','webgui.views.activeAlarmClock'),
+    url(r'^addalarmclock/$','webgui.views.addalarmclock'),
 )

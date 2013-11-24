@@ -85,3 +85,9 @@ def activeAlarmClock(request,id):
         
     alarmclock.save()
     return redirect('/alarmclock/')
+
+def addalarmclock(request):
+    listradio = Webradio.objects.all()
+    return render(request, 'addalarmclock.html', {'rangeHour': range(24),
+                                                  'rangeMinute': range(59),
+                                                  'listradio':listradio})
