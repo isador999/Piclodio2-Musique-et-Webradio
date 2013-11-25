@@ -3,6 +3,9 @@ from django.shortcuts import render, redirect
 from webgui.models import Webradio, Player, Alarmclock
 from webgui.forms import WebradioForm
 import time
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+import json
 
 #---------------------------------
 #   Show the homepage
@@ -76,6 +79,7 @@ def alarmclock(request):
     listAlarm = Alarmclock.objects.all()
     return render(request, 'alarmclock.html',{'listAlarm': listAlarm,})
 
+
 def activeAlarmClock(request,id):
     alarmclock = Alarmclock.objects.get(id=id)
     if (alarmclock.active==False):
@@ -86,8 +90,42 @@ def activeAlarmClock(request,id):
     alarmclock.save()
     return redirect('/alarmclock/')
 
+@csrf_exempt 
 def addalarmclock(request):
-    listradio = Webradio.objects.all()
-    return render(request, 'addalarmclock.html', {'rangeHour': range(24),
-                                                  'rangeMinute': range(59),
-                                                  'listradio':listradio})
+    if request.method == 'POST':
+        label       = request.POST['label']
+        hour        = request.POST['hour']
+        minute      = request.POST['minute']
+        snooze      = request.POST['snooze']
+        id_webradio    = request.POST['webradio']
+        dayofweek   = request.POST['dayofweek']
+        
+        # check if label not empty and days selected
+        if label =="" or dayofweek=="":
+            json_data = json.dumps({"HTTPRESPONSE":"error"})
+            return HttpResponse(json_data, mimetype="application/json")
+        
+        # save object in database
+        alarmclock = Alarmclock()
+        alarmclock.label    = label
+        alarmclock.hour     = hour
+        alarmclock.minute   = minute
+        alarmclock.period   = dayofweek
+        webradio = Webradio.objects.get(id=id_webradio)
+        alarmclock.webradio = webradio
+        alarmclock.active=True
+        alarmclock.save()
+        
+        # set the cron
+        
+        
+        # set at commande if snooze setted
+        
+        json_data = json.dumps({"HTTPRESPONSE":"ok"})
+        return HttpResponse(json_data, mimetype="application/json")
+    
+    else: # not post, show the form
+        listradio = Webradio.objects.all()
+        return render(request, 'addalarmclock.html', {'rangeHour': range(24),
+                                                      'rangeMinute': range(60),
+                                                      'listradio':listradio})

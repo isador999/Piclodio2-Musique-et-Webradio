@@ -74,10 +74,12 @@
         <fieldset class="scheduler-border">
             <legend class="scheduler-border"><a href="/webradio/" style="margin-bottom: 3px" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-cog"></span></a>  Web radio </legend>
             <p style="text-align: center;"class="lead {% if player.status == True %}text-primary{% endif %}">{{radio.name}}</p>
-            <div class="btn-group btn-group-justified">
-                <a href="/play/{{radio.id}}" id="play" class="btn btn-{% if player.status == True %}primary{% else %}default{% endif %} btn-lg">Play</a>
-                <a href="/stop/" id="stop" class="btn btn-{% if player.status == False %}primary{% else %}default{% endif %} btn-lg">Stop</a>
-            </div>
+            {% if radio != None  %}
+                <div class="btn-group btn-group-justified" style="margin-bottom: 20px">
+                    <a href="/play/{{radio.id}}" id="play" class="btn btn-{% if player.status == True %}primary{% else %}default{% endif %} btn-lg">Play</a>
+                    <a href="/stop/" id="stop" class="btn btn-{% if player.status == False %}primary{% else %}default{% endif %} btn-lg">Stop</a>
+                </div>
+            {% endif %}  
         </fieldset>    
     </div>
     
