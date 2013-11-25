@@ -129,3 +129,8 @@ def addalarmclock(request):
         return render(request, 'addalarmclock.html', {'rangeHour': range(24),
                                                       'rangeMinute': range(60),
                                                       'listradio':listradio})
+                                                      
+def deleteAlarmClock(request,id):
+    alarmclock = Alarmclock.objects.get(id=id)
+    alarmclock.delete()
+    return redirect('/alarmclock/')

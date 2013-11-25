@@ -51,6 +51,8 @@ function goAddAlarmClock(){
                 $("#message").alert();
                 // hide after 3 seconds
                 var t = setTimeout("$(\"#message\").hide() ;",3000);
+            }else{
+                window.location.replace("/alarmclock");
             }
         }    
     });
