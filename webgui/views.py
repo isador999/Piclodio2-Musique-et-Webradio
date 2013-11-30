@@ -49,7 +49,14 @@ def deleteWebRadio(request,id):
     radio.delete()
     return redirect('/webradio/')
 
-        
+def options(request):
+    todisplay = 'hello world';
+    return render(request,'options.html', {'todisplay':todisplay})
+
+def debug(request):
+    todisplay = 'hello world debug';
+    return render(request,'debug.html', {'todisplay':todisplay})
+ 
 def play(request,id):
     # get actual selected radio if exist
     try:

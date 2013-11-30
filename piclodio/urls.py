@@ -19,5 +19,6 @@ urlpatterns = patterns('',
     url(r'^activeAlarmClock/(\d+)/$','webgui.views.activeAlarmClock'),
     url(r'^addalarmclock$','webgui.views.addalarmclock'),
     url(r'^deleteAlarmClock/(\d+)/$','webgui.views.deleteAlarmClock'),
-    
+    url(r'^options/$','webgui.views.options'),
+    url(r'^debug/$','webgui.views.options'),
 )
