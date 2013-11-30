@@ -127,6 +127,7 @@ def addalarmclock(request):
         alarmclock.save()
         
         # set the cron
+        alarmclock= Alarmclock.objects.latest('id')
         alarmclock.enable()
         
         json_data = json.dumps({"HTTPRESPONSE":"ok"})
@@ -140,5 +141,6 @@ def addalarmclock(request):
                                                       
 def deleteAlarmClock(request,id):
     alarmclock = Alarmclock.objects.get(id=id)
+    alarmclock.disable()
     alarmclock.delete()
     return redirect('/alarmclock/')
