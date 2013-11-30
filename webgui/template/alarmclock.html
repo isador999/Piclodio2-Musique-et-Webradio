@@ -53,10 +53,14 @@
                                 
                                 {% if alarmclock.hour < 10 %}
                                     0{{alarmclock.hour}}
+				{% else %}
+					{{alarmclock.hour}}
                                 {% endif %}
                                 :
                                 {% if alarmclock.minute < 10 %}
                                     0{{alarmclock.minute}}
+				{% else %}
+					{{alarmclock.minute}}
                                 {% endif %}
                                 
                             </th>
