@@ -56,13 +56,17 @@
                                     <div class="col-xs-1"><span class="text-{% if "0" in alarmclock.period  %}primary{% else %}muted{% endif %}">Su</span></div>
                                  </th>
                                 <th>
-                                    {% if alarmclock.hour < 10 %}
-                                        0{{alarmclock.hour}}
-                                    {% endif %}
-                                    :
-                                    {% if alarmclock.minute < 10 %}
-                                        0{{alarmclock.minute}}
-                                    {% endif %}
+                                {% if alarmclock.hour < 10 %}
+                                    0{{alarmclock.hour}}
+				{% else %}
+					{{alarmclock.hour}}
+                                {% endif %}
+                                :
+                                {% if alarmclock.minute < 10 %}
+                                    0{{alarmclock.minute}}
+				{% else %}
+					{{alarmclock.minute}}
+                                {% endif %}
                                 </th>
                             </tr>
                           {% endif %}  
