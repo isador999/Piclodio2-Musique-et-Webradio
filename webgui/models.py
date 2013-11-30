@@ -25,7 +25,7 @@ class Alarmclock(models.Model):
     # enable The alarm clock. Set it into the crontab   
     def enable(self):
         BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-        cron    = CronTab(user='nico')                                      # get actual crontab
+        cron    = CronTab()                                      # get actual crontab
         cronLine = str(self.minute)+" "+str(self.hour)+" * * "+self.period
         job  = cron.new(command="python "+ BASE_DIR+"/runWebRadio.py "+str(self.id),comment='piclodio'+str(self.id))
         job.setall(cronLine)
