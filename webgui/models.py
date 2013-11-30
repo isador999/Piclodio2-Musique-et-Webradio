@@ -1,7 +1,8 @@
 from django.db import models
 from time import gmtime, strftime, localtime
 import subprocess
-import time
+import time, os
+from crontab import CronTab
 
 # WebRadio
 class Webradio(models.Model):
@@ -17,10 +18,25 @@ class Alarmclock(models.Model):
     hour =      models.IntegerField(blank=True)
     minute =    models.IntegerField(blank=True)
     period =    models.CharField(max_length=100)    # cron syntax dow (day of week)
-    active =    models.BooleanField()               # is this Alarm Clock active?
+    active =    models.BooleanField()
     webradio =  models.ForeignKey(Webradio)
     
-
+    # enable The alarm clock. Set it into the crontab   
+    def enable(self):
+        BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+        cron    = CronTab(user='nico')                                      # get actual crontab
+        cronLine = str(self.minute)+" "+str(self.hour)+" * * "+self.period
+        job  = cron.new(command= BASE_DIR+"/webgui/utils/runWebRadio.py "+str(self.id),comment='piclodio'+str(self.id))
+        job.setall(cronLine)
+        job.enable()
+        cron.write()
+        
+    # disable the alarm clock. remove it from the crontab    
+    def disable(self):    
+        cron    = CronTab(user='nico')
+        cron.remove_all(comment='piclodio'+str(self.id))
+        cron.write()
+        
 class Player():
     "Constructor"
     def __init__(self):

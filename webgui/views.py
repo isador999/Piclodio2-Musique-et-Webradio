@@ -84,8 +84,10 @@ def activeAlarmClock(request,id):
     alarmclock = Alarmclock.objects.get(id=id)
     if (alarmclock.active==False):
         alarmclock.active=True
+        alarmclock.enable()
     else:
         alarmclock.active=False
+        alarmclock.disable()
         
     alarmclock.save()
     return redirect('/alarmclock/')
