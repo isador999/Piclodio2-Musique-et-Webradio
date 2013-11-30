@@ -120,9 +120,7 @@ def addalarmclock(request):
         alarmclock.save()
         
         # set the cron
-        
-        
-        # set at commande if snooze setted
+        alarmclock.enable()
         
         json_data = json.dumps({"HTTPRESPONSE":"ok"})
         return HttpResponse(json_data, mimetype="application/json")
