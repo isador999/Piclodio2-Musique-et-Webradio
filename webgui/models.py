@@ -62,15 +62,15 @@ class Player():
         extension=splitUrl[sizeTab-1]
         command= self.getthegoodcommand(extension)
         
-        p = subprocess.Popen(command+radio.url, stdout=subprocess.PIPE, shell=True)    
+        p = subprocess.Popen(command+radio.url, shell=True)    
         
     def stop(self):
-        p = subprocess.Popen("killall mplayer", stdout=subprocess.PIPE, shell=True)
+        p = subprocess.Popen("killall mplayer", shell=True)
         (output, err) = p.communicate()
    
     # switch extension, start mplay differently     
     def getthegoodcommand(self,extension):
          return {
-                 'asx': "mplayer -playlist "
+                 'asx': "/usr/bin/mplayer -playlist "
 
-         }.get(extension,"mplayer ")  # default is mplayer  
+         }.get(extension,"/usr/bin/mplayer ")  # default is mplayer  
