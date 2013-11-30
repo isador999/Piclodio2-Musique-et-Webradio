@@ -1,7 +1,7 @@
 from django.db import models
 from time import gmtime, strftime, localtime
 import subprocess
-import time, os
+import time, os, string
 from crontab import CronTab
 
 # WebRadio
@@ -55,9 +55,22 @@ class Player():
         # kill process if already running
         if (self.isStarted):
             self.stop()
-        # play url
-        p = subprocess.Popen("mplayer "+radio.url, stdout=subprocess.PIPE, shell=True)    
+        
+        url = radio.url # get the url
+        splitUrl =string.split(url, ".")
+        sizeTab= len(splitUrl)
+        extension=splitUrl[sizeTab-1]
+        command= self.getthegoodcommand(extension)
+        
+        p = subprocess.Popen(command+radio.url, stdout=subprocess.PIPE, shell=True)    
         
     def stop(self):
         p = subprocess.Popen("killall mplayer", stdout=subprocess.PIPE, shell=True)
         (output, err) = p.communicate()
+   
+    # switch extension, start mplay differently     
+    def getthegoodcommand(self,extension):
+         return {
+                 'asx': "mplayer -playlist "
+
+         }.get(extension,"mplayer ")  # default is mplayer  
