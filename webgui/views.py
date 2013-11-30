@@ -113,6 +113,7 @@ def addalarmclock(request):
         alarmclock.hour     = hour
         alarmclock.minute   = minute
         alarmclock.period   = dayofweek
+	alarmclock.snooze   = snooze
         webradio = Webradio.objects.get(id=id_webradio)
         alarmclock.webradio = webradio
         alarmclock.active=True

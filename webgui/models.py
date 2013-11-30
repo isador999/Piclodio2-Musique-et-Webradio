@@ -19,6 +19,7 @@ class Alarmclock(models.Model):
     minute =    models.IntegerField(blank=True)
     period =    models.CharField(max_length=100)    # cron syntax dow (day of week)
     active =    models.BooleanField()
+    snooze =    models.IntegerField(blank=True)
     webradio =  models.ForeignKey(Webradio)
     
     # enable The alarm clock. Set it into the crontab   
