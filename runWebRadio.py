@@ -13,7 +13,7 @@ ac = Alarmclock.objects.get(id=acid)
 #Check if autosnooze activated
 snooze = ac.snooze
 if snooze != 0:
-    cmd='echo "sudo /usr/bin/killall mplayer" | /usr/bin/at "now +'+str(snooze)+' minute"'
+    cmd='echo "/usr/bin/killall mplayer" | /usr/bin/at "now +'+str(snooze)+' minute"'
     p = subprocess.Popen(cmd, shell=True)
 
 #Play the radio
