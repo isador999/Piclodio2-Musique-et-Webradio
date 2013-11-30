@@ -34,7 +34,7 @@ class Alarmclock(models.Model):
         
     # disable the alarm clock. remove it from the crontab    
     def disable(self):    
-        cron    = CronTab(user='nico')
+        cron    = CronTab()
         cron.remove_all(comment='piclodio'+str(self.id))
         cron.write()
         
