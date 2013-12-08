@@ -1,7 +1,7 @@
 import os
 import sys
 
-path = '/media/nico/Dropbox/Code_Source/Piclodio/src/Piclodio2'
+path = '/var/www/Piclodio2'
 if path not in sys.path:
     sys.path.append(path)
     
