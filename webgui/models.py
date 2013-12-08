@@ -45,7 +45,7 @@ class Player():
         
     def isStarted(self):
         # check number of process
-        p = subprocess.Popen("pgrep mplayer", stdout=subprocess.PIPE, shell=True)
+        p = subprocess.Popen("sudo pgrep mplayer", stdout=subprocess.PIPE, shell=True)
         (output, err) = p.communicate()
         if output =="":
                 return False
@@ -66,12 +66,12 @@ class Player():
         p = subprocess.Popen(command+radio.url, shell=True)    
         
     def stop(self):
-        p = subprocess.Popen("killall mplayer", shell=True)
+        p = subprocess.Popen("sudo killall mplayer", shell=True)
         (output, err) = p.communicate()
    
     # switch extension, start mplay differently     
     def getthegoodcommand(self,extension):
          return {
-                 'asx': "/usr/bin/mplayer -playlist "
+                 'asx': "sudo /usr/bin/mplayer -playlist "
 
-         }.get(extension,"/usr/bin/mplayer ")  # default is mplayer  
+         }.get(extension,"sudo /usr/bin/mplayer ")  # default is mplayer  
