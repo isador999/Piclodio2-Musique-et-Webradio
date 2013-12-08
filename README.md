@@ -40,5 +40,13 @@ Enable the vHost
 ```
 a2ensite piclodio
 ```
+And last, we have to allow the Apache user www-data to use mplayer. Edit the sudoers file with the command
+```
+sudo visudo
+```
+and add this line at the end of the file
+```
+www-data ALL=NOPASSWD:/usr/bin/mplayer* ,/usr/bin/pgrep mplayer ,/usr/bin/killall mplayer
+```
 
 That's it! Piclodio is now available on it IP adresse.
