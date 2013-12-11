@@ -15,14 +15,14 @@
   <body>
     <!-- Header -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation">
-        <a class="navbar-brand" href="/">Piclodio</a><p class="navbar-text">New Web Radio</p>
+        <a class="navbar-brand" href="{% url 'webgui.views.homepage' %}">Piclodio</a><p class="navbar-text">New Web Radio</p>
         <button style="float: right;margin-right:20px" type="button" class="btn btn-default navbar-btn">Options</button>
     </nav>
     
     <div class="container">
         <fieldset class="scheduler-border">
             <legend class="scheduler-border">New web radio</legend>
-            <form role="form" action="/addwebradio/" method="post">{% csrf_token %}
+            <form role="form" action="{% url 'webgui.views.addwebradio' %}" method="post">{% csrf_token %}
                   {{ form.non_field_errors }}
                   <div class="form-group">
                     {{ form.subject.errors }}  

@@ -38,7 +38,7 @@ def addwebradio(request):
             # save web radio
             form.instance.selected=False;
             form.save()
-            return redirect('/webradio/')
+            return redirect('webgui.views.webradio')
     else:
         form = WebradioForm() # An unbound form
 
@@ -47,7 +47,7 @@ def addwebradio(request):
 def deleteWebRadio(request,id):
     radio = Webradio.objects.get(id=id)
     radio.delete()
-    return redirect('/webradio/')
+    return redirect('webgui.views.webradio')
 
 def options(request):
     todisplay = 'hello world';
@@ -73,14 +73,15 @@ def play(request,id):
     radio.save()
     player = Player()
     player.play(radio)
-    return redirect('/')
+    return redirect('webgui.views.homepage')
 
 def stop(request):
     player = Player()
     player.stop()
     # sleep to be sure the process have been killed
     time.sleep(1)
-    return redirect('/')
+    return redirect('webgui.views.homepage')
+    
 
 def alarmclock(request):
     listAlarm = Alarmclock.objects.all()
@@ -97,7 +98,7 @@ def activeAlarmClock(request,id):
         alarmclock.disable()
         
     alarmclock.save()
-    return redirect('/alarmclock/')
+    return redirect('webgui.views.alarmclock')
 
 @csrf_exempt 
 def addalarmclock(request):
@@ -143,4 +144,4 @@ def deleteAlarmClock(request,id):
     alarmclock = Alarmclock.objects.get(id=id)
     alarmclock.disable()
     alarmclock.delete()
-    return redirect('/alarmclock/')
+    return redirect('webgui.views.alarmclock')

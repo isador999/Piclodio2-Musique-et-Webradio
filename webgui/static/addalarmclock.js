@@ -39,7 +39,7 @@ function goAddAlarmClock(){
     // send all of that shit to the server
     $.ajax({
         type: "POST",               
-        url: "/addalarmclock",
+        url: "addalarmclock",
         dataType: "json",
         traditional: true,
         data: {label: label,hour: hour,minute:minute, snooze:snooze, webradio:webradio,dayofweek:dayofweek },

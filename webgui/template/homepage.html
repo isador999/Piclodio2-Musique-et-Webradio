@@ -15,13 +15,13 @@
   <body>
     <!-- Header -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation">
-        <a class="navbar-brand" href="/">Piclodio</a><p class="navbar-text">Home</p>
- <a href="/options/" style="float: right;margin-right:20px" type="button" class="btn btn-default navbar-btn">Options</a>
+        <a class="navbar-brand" href="{% url 'webgui.views.homepage' %}">Piclodio</a><p class="navbar-text">Home</p>
+        <a href="{% url 'webgui.views.options' %}" style="float: right;margin-right:20px" type="button" class="btn btn-default navbar-btn">Options</a>
     </nav>
     
     <div class="container">
         <fieldset class="scheduler-border">
-            <legend class="scheduler-border"><a href="/" style="margin-bottom: 3px" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-refresh"></span></a>  Rpi date and time</legend>
+            <legend class="scheduler-border"><a href="{% url 'webgui.views.homepage' %}" style="margin-bottom: 3px" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-refresh"></span></a>  Rpi date and time</legend>
             <div style="text-align: center">
                 
                 <strong class="text-primary">{% now "H:i" %}</strong></br>
@@ -30,7 +30,7 @@
         </fieldset>
         </br>
         <fieldset class="scheduler-border">
-            <legend class="scheduler-border"><a href="/alarmclock/" style="margin-bottom: 3px" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-cog"></span></a>  Alarm clock</legend>
+            <legend class="scheduler-border"><a href="{% url 'webgui.views.alarmclock' %}" style="margin-bottom: 3px" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-cog"></span></a>  Alarm clock</legend>
             <table class="table">
                 <thead>
                     <tr>
@@ -76,12 +76,12 @@
         </fieldset>
       
         <fieldset class="scheduler-border">
-            <legend class="scheduler-border"><a href="/webradio/" style="margin-bottom: 3px" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-cog"></span></a>  Web radio </legend>
+            <legend class="scheduler-border"><a href="{% url 'webgui.views.webradio' %}" style="margin-bottom: 3px" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-cog"></span></a>  Web radio </legend>
             <p style="text-align: center;"class="lead {% if player.status == True %}text-primary{% endif %}">{{radio.name}}</p>
             {% if radio != None  %}
                 <div class="btn-group btn-group-justified" style="margin-bottom: 20px">
-                    <a href="/play/{{radio.id}}" id="play" class="btn btn-{% if player.status == True %}primary{% else %}default{% endif %} btn-lg">Play</a>
-                    <a href="/stop/" id="stop" class="btn btn-{% if player.status == False %}primary{% else %}default{% endif %} btn-lg">Stop</a>
+                    <a href="{% url 'webgui.views.play' radio.id %}" id="play" class="btn btn-{% if player.status == True %}primary{% else %}default{% endif %} btn-lg">Play</a>
+                    <a href="{% url 'webgui.views.stop'  %}" id="stop" class="btn btn-{% if player.status == False %}primary{% else %}default{% endif %} btn-lg">Stop</a>
                 </div>
             {% endif %}  
         </fieldset>    

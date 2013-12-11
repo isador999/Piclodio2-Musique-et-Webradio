@@ -15,8 +15,8 @@
   <body>
     <!-- Header -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation">
-        <a class="navbar-brand" href="/">Piclodio</a><p class="navbar-text">Options</p>
- <a href="/debug/" style="float: right;margin-right:20px" type="button" class="btn btn-default navbar-btn">Debug</a>
+        <a class="navbar-brand" href="{% url 'webgui.views.homepage' %}">Piclodio</a><p class="navbar-text">Options</p>
+        <a href="{% url 'webgui.views.options' %}" style="float: right;margin-right:20px" type="button" class="btn btn-default navbar-btn">Debug</a>
         </nav>
     <div class="container">
          <fieldset class="scheduler-border">
