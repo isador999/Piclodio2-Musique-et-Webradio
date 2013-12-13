@@ -6,6 +6,7 @@ import time
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 import json
+from django.core.urlresolvers import reverse
 
 #---------------------------------
 #   Show the homepage
@@ -131,7 +132,11 @@ def addalarmclock(request):
         alarmclock= Alarmclock.objects.latest('id')
         alarmclock.enable()
         
-        json_data = json.dumps({"HTTPRESPONSE":"ok"})
+        # return the base URL of current instance
+        
+        url= request.build_absolute_uri('alarmclock')
+        print url
+        json_data = json.dumps({"HTTPRESPONSE":url})
         return HttpResponse(json_data, mimetype="application/json")
     
     else: # not post, show the form
