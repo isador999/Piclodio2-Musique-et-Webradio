@@ -46,7 +46,7 @@ sudo visudo
 ```
 and add this line at the end of the file
 ```
-www-data ALL=NOPASSWD:/usr/bin/mplayer* ,/usr/bin/pgrep mplayer ,/usr/bin/killall mplayer
+www-data ALL=NOPASSWD:/usr/bin/mplayer* ,/usr/bin/pgrep mplayer ,/usr/bin/killall mplayer, /usr/bin/at
 ```
 
 That's it! Piclodio is now available on it IP adresse.
