@@ -1,7 +1,7 @@
 Piclodio2
 =========
 
-Raspberry Pi Web Clock Rado Web Server app
+Raspberry Pi Web Clock Radio.
 
 Installation
 ==========
