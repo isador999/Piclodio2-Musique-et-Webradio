@@ -2,6 +2,7 @@ Piclodio2
 =========
 
 Raspberry Pi Web Clock Radio.
+![alt tag](https://raw.github.com/Sispheor/Piclodio2/master/img/piclodio_home.png)
 
 Installation
 ==========
