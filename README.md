@@ -21,6 +21,7 @@ sudo apt-get install mplayer at sqlite3 apache2 libapache2-mod-wsgi
 Install Crontab module
 ```
 wget https://pypi.python.org/packages/source/p/python-crontab/python-crontab-1.7.0.tar.gz
+tar xzf python-crontab-1.7.0.tar.gz
 cd python-crontab-1.7.0/
 sudo python setup.py install
 ```
