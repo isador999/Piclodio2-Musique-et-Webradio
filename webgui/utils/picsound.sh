@@ -15,13 +15,13 @@ echo "picsound --up <\d>"
 echo "picsound --down <\d>"
 }
 
-idPlaybackRoute=$(amixer controls | grep 'Playback Route' | cut -d'=' -f2 | cut -d',' -f1)
-idPlaybackSwitch=$(amixer controls | grep 'Playback Switch' | cut -d'=' -f2 | cut -d',' -f1)
-idPlaybackVolume=$(amixer controls | grep 'Playback Volume' | cut -d'=' -f2 | cut -d',' -f1)
+getIdPlaybackRoute() { echo $(amixer controls | grep 'Playback Route' | cut -d'=' -f2 | cut -d',' -f1); }
+getIdPlaybackSwitch() { echo $(amixer controls | grep 'Playback Switch' | cut -d'=' -f2 | cut -d',' -f1); }
+getIdPlaybackVolume() { echo $(amixer controls | grep 'Playback Volume' | cut -d'=' -f2 | cut -d',' -f1); }
 
-currentDevice=$(amixer cget numid=$idPlaybackRoute | grep ': values=' | grep -oE '[0-2]')
-currentLevel=$(amixer scontents|grep -oE '[0-9]+%'|grep -oE '[0-9]+')
-currentSwitch=$(amixer cget numid=$idPlaybackSwitch |grep ': values'|cut -d'=' -f2)
+getCurrentDevice() { echo $(amixer cget numid=$(getIdPlaybackRoute) | grep ': values=' | grep -oE '[0-2]'); }
+getCurrentLevel() { echo $(amixer scontents|grep -oE '[0-9]+%'|grep -oE '[0-9]+'); }
+getCurrentSwitch() { echo $(amixer cget numid=$(getIdPlaybackSwitch) |grep ': values'|cut -d'=' -f2); }
 
 case $1 in
         --debug)
@@ -29,14 +29,14 @@ case $1 in
                 echo "----------------------------------------------------"
                 amixer controls
                 echo "----------------------------------------------------"
-                echo idPlaybackRoute : $idPlaybackRoute
-                echo idPlaybackSwitch : $idPlaybackSwitch
-                echo idPlaybackVolume : $idPlaybackVolume
+                echo idPlaybackRoute : $(getIdPlaybackRoute)
+                echo idPlaybackSwitch : $(getIdPlaybackSwitch)
+                echo idPlaybackVolume : $(getIdPlaybackVolume)
                 echo "----------------------------------------------------"
-                echo currentDevice : $currentDevice
+                echo currentDevice : $(getCurrentDevice)
                 echo 0=auto, 1=analog, 2=hdmi
-                echo currentLevel : $currentLevel
-                echo currentSwitch : $currentSwitch
+                echo currentLevel : $(getCurrentLevel)
+                echo currentSwitch : $(getCurrentSwitch)
                 echo "----------------------------------------------------"
                 exit
                 ;;
@@ -45,42 +45,42 @@ case $1 in
                 exit
                 ;;
         --getDevice)
-                echo $currentDevice;
+                echo $(getCurrentDevice)
                 exit
                 ;;
         --getLevel)
-                echo $currentLevel;
+                echo $(getCurrentLevel)
                 exit
                 ;;
         --getSwitch)
-                echo $currentSwitch;
+                echo $(getCurrentSwitch)
                 exit
                 ;;
         --setLevel)
-                amixer cset numid=$idPlaybackVolume $2%
+                amixer cset numid=$(getIdPlaybackVolume) $2%
                 exit
                 ;;
         --setDevice)
-                amixer cset numid=$idPlaybackRoute $2
+                amixer cset numid=$(getIdPlaybackRoute) $2
                 exit
                 ;;
         --toggleSwitch)
-		if [ "$currentSwitch" == "on" ]
+		if [ "$(getCurrentSwitch)" == "on" ]
 		then
-                	amixer cset numid=$idPlaybackSwitch off
+                	amixer cset numid=$(getIdPlaybackSwitch) off
 		else
-                	amixer cset numid=$idPlaybackSwitch on
+                	amixer cset numid=$(getIdPlaybackSwitch) on
 		fi
                 exit
                 ;;
 	--up)
-		level=$(($currentLevel + $2))
-                amixer cset numid=$idPlaybackVolume $level%
+		level=$(($(getCurrentLevel) + $2))
+                amixer cset numid=$(getIdPlaybackVolume) $level%
 		exit
 		;;
 	--down)
-		level=$(($currentLevel - $2))
-                amixer cset numid=$idPlaybackVolume $level%
+		level=$(($(getCurrentLevel) - $2))
+                amixer cset numid=$(getIdPlaybackVolume) $level%
 		exit
 		;;
 esac
