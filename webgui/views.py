@@ -7,6 +7,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 import json
 from django.core.urlresolvers import reverse
+import subprocess
+from django.templatetags.static import static
 
 #---------------------------------
 #   Show the homepage
@@ -51,8 +53,12 @@ def deleteWebRadio(request,id):
     return redirect('webgui.views.webradio')
 
 def options(request):
-    todisplay = 'hello world';
-    return render(request,'options.html', {'todisplay':todisplay})
+    #scriptPath = SITE_ROOT + 'webgui/utils/picsound.sh'
+    #currentVolume = subprocess.check_output([script,"--getLevel"])
+    currentVolume = subprocess.check_output(["/home/pi/Piclodio2/webgui/utils/picsound.sh","--getLevel"])
+    currentMute = subprocess.check_output(["/home/pi/Piclodio2/webgui/utils/picsound.sh","--getSwitch"])
+    #return render(request,'options.html', {'currentVolume':scriptPath,'currentMute':currentMute})
+    return render(request,'options.html', {'currentVolume':currentVolume,'currentMute':currentMute})
 
 def debug(request):
     todisplay = 'hello world debug';
@@ -150,3 +156,18 @@ def deleteAlarmClock(request,id):
     alarmclock.disable()
     alarmclock.delete()
     return redirect('webgui.views.alarmclock')
+
+# Volume stuff
+
+def volumeup(request,count):
+    subprocess.call(["/home/pi/Piclodio2/webgui/utils/picsound.sh","--up",count])
+    return redirect('webgui.views.options')
+def volumedown(request,count):
+    subprocess.call(["/home/pi/Piclodio2/webgui/utils/picsound.sh","--down",count])
+    return redirect('webgui.views.options')
+def volumeset(request,volume):
+    subprocess.call(["/home/pi/Piclodio2/webgui/utils/picsound.sh","--setLevel",volume])
+    return redirect('webgui.views.options')
+def volumetmute(request):
+    subprocess.call(["/home/pi/Piclodio2/webgui/utils/picsound.sh","--toggleSwitch"])
+    return redirect('webgui.views.options')

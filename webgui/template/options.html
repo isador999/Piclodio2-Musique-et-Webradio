@@ -21,20 +21,20 @@
        <div class="container">
             <fieldset class="scheduler-border">
                 <legend class="scheduler-border">Volume</legend>
-		<p>Current volume value : 69</p>
-   		<div class="btn-group-lg" style="margin-bottom:15px;">
-		  <button type="button" style="width:99%" class="btn btn-default">Mute</button>
+		<p>Current volume value : {{ currentVolume }}</p>
+   		<div class="btn-group btn-group-lg btn-group-justified" style="margin-bottom:15px;">
+		  <a href="{% url 'webgui.views.volumetmute' %}" class="btn btn-default">Mute {{ currentMute }}</a>
 		</div>
-   		<div class="btn-group-lg" style="margin-bottom:15px;">
-		  <button type="button" style="width:19%" class="btn btn-default">20</button>
- 		  <button type="button" style="width:19%" class="btn btn-default">40</button>
-		  <button type="button" style="width:19%" class="btn btn-default">60</button>
-		  <button type="button" style="width:19%" class="btn btn-default">80</button>
-		  <button type="button" style="width:19%" class="btn btn-default">100</button>
+   		<div class="btn-group btn-group-lg btn-group-justified" style="margin-bottom:15px;">
+		  <a href="{% url 'webgui.views.volumeset' '20'%}" class="btn btn-default">20</a>
+ 		  <a href="{% url 'webgui.views.volumeset' '40'%}" class="btn btn-default">40</a>
+		  <a href="{% url 'webgui.views.volumeset' '60'%}" class="btn btn-default">60</a>
+		  <a href="{% url 'webgui.views.volumeset' '80'%}" class="btn btn-default">80</a>
+		  <a href="{% url 'webgui.views.volumeset' '100'%}" class="btn btn-default">100</a>
 		</div>
-   		<div class="btn-group-lg">
-		  <button type="button" style="width:48%" class="btn btn-default">+5</button>
- 		  <button type="button" style="width:48%" class="btn btn-default">-5</button>
+   		<div class="btn-group btn-group-lg btn-group-justified" style="margin-bottom:15px;">
+		  <a href="{% url 'webgui.views.volumedown' '5'%}" class="btn btn-default">-5</a>
+ 		  <a href="{% url 'webgui.views.volumeup' '5'%}" class="btn btn-default">+5</a>
 		</div>
            </fieldset >
        </div>

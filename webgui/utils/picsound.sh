@@ -9,7 +9,10 @@ echo "picsound --getSwitch"
 
 echo "picsound --setDevice <0-3>"
 echo "picsound --setLevel <0-100>"
-echo "picsound --setSwitch <on|off>"
+echo "picsound --toggleSwitch"
+
+echo "picsound --up <\d>"
+echo "picsound --down <\d>"
 }
 
 idPlaybackRoute=$(amixer controls | grep 'Playback Route' | cut -d'=' -f2 | cut -d',' -f1)
@@ -18,7 +21,7 @@ idPlaybackVolume=$(amixer controls | grep 'Playback Volume' | cut -d'=' -f2 | cu
 
 currentDevice=$(amixer cget numid=$idPlaybackRoute | grep ': values=' | grep -oE '[0-2]')
 currentLevel=$(amixer scontents|grep -oE '[0-9]+%'|grep -oE '[0-9]+')
-currentSwitch=$(amixer cget numid=2 |grep ': values'|cut -d'=' -f2)
+currentSwitch=$(amixer cget numid=$idPlaybackSwitch |grep ': values'|cut -d'=' -f2)
 
 case $1 in
         --debug)
@@ -61,10 +64,25 @@ case $1 in
                 amixer cset numid=$idPlaybackRoute $2
                 exit
                 ;;
-        --setSwitch)
-                amixer cset numid=$idPlaybackSwitch $2
+        --toggleSwitch)
+		if [ "$currentSwitch" == "on" ]
+		then
+                	amixer cset numid=$idPlaybackSwitch off
+		else
+                	amixer cset numid=$idPlaybackSwitch on
+		fi
                 exit
                 ;;
+	--up)
+		level=$(($currentLevel + $2))
+                amixer cset numid=$idPlaybackVolume $level%
+		exit
+		;;
+	--down)
+		level=$(($currentLevel - $2))
+                amixer cset numid=$idPlaybackVolume $level%
+		exit
+		;;
 esac
 
 echo "Bad arguments"
