@@ -1,29 +1,43 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Piclodio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link href="{{ STATIC_URL }}/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- jQuery  -->
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <!-- Boostrap -->
-    <script src="{{ STATIC_URL }}/dist/js/bootstrap.min.js"></script>
-    <!-- personal js -->
-    <script src="{{ STATIC_URL }}webradio.js"></script>
-  </head>
-  <body>
-    <!-- Header -->
-    <nav class="navbar navbar-default navbar-static-top" role="navigation">
-        <a class="navbar-brand" href="{% url 'webgui.views.homepage' %}">Piclodio</a><p class="navbar-text">Options</p>
-        <a href="{% url 'webgui.views.options' %}" style="float: right;margin-right:20px" type="button" class="btn btn-default navbar-btn">Debug</a>
-        </nav>
-    <div class="container">
-         <fieldset class="scheduler-border">
-            <legend class="scheduler-border">Volume</legend>
-
-        </fieldset >
-    </div>
-
-  </body>
+    <head>
+        <title>Piclodio</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap -->
+        <link href="{{ STATIC_URL }}/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- jQuery  -->
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <!-- Boostrap -->
+        <script src="{{ STATIC_URL }}/dist/js/bootstrap.min.js"></script>
+        <!-- personal js -->
+        <script src="{{ STATIC_URL }}webradio.js"></script>
+    </head>
+    <body>
+       <!-- Header -->
+       <nav class="navbar navbar-default navbar-static-top" role="navigation">
+           <a class="navbar-brand" href="{% url 'webgui.views.homepage' %}">Piclodio</a><p class="navbar-text">Options</p>
+           <a href="{% url 'webgui.views.options' %}" style="float: right;margin-right:20px" type="button" class="btn btn-default navbar-btn">Debug</a>
+           </nav>
+       <div class="container">
+            <fieldset class="scheduler-border">
+                <legend class="scheduler-border">Volume</legend>
+		<p>Current volume value : 69</p>
+   		<div class="btn-group-lg" style="margin-bottom:15px;">
+		  <button type="button" style="width:99%" class="btn btn-default">Mute</button>
+		</div>
+   		<div class="btn-group-lg" style="margin-bottom:15px;">
+		  <button type="button" style="width:19%" class="btn btn-default">20</button>
+ 		  <button type="button" style="width:19%" class="btn btn-default">40</button>
+		  <button type="button" style="width:19%" class="btn btn-default">60</button>
+		  <button type="button" style="width:19%" class="btn btn-default">80</button>
+		  <button type="button" style="width:19%" class="btn btn-default">100</button>
+		</div>
+   		<div class="btn-group-lg">
+		  <button type="button" style="width:48%" class="btn btn-default">+5</button>
+ 		  <button type="button" style="width:48%" class="btn btn-default">-5</button>
+		</div>
+           </fieldset >
+       </div>
+   
+    </body>
 </html>
