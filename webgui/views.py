@@ -11,9 +11,7 @@ from django.core.urlresolvers import reverse
 import subprocess
 from django.templatetags.static import static
 
-#---------------------------------
-#   Show the homepage
-#---------------------------------
+
 def homepage(request):
     try:
         radio = Webradio.objects.get(selected=1)
@@ -25,16 +23,12 @@ def homepage(request):
                                              'player': player,
                                              'listalarmclock': listalarmclock})
 
-#---------------------------------
-#   Show list of web radio in db
-#---------------------------------
+
 def webradio(request):
     listRadio = Webradio.objects.all()
     return render(request,'webradio.html', {'listradio':listRadio})
 
-#---------------------------------
-#   Form to add new web radio
-#---------------------------------
+
 def addwebradio(request):
     if request.method == 'POST': # If the form has been submitted...
         form = WebradioForm(request.POST) # A form bound to the POST data
@@ -48,10 +42,12 @@ def addwebradio(request):
 
     return render(request, 'addwebradio.html', { 'form': form,})
 
+
 def deleteWebRadio(request,id):
     radio = Webradio.objects.get(id=id)
     radio.delete()
     return redirect('webgui.views.webradio')
+
 
 def options(request):
     scriptPath = os.path.dirname(os.path.abspath(__file__))+"/utils/picsound.sh"
@@ -59,10 +55,12 @@ def options(request):
     currentMute = subprocess.check_output([scriptPath, "--getSwitch"])
     return render(request,'options.html', {'currentVolume':currentVolume,'currentMute':currentMute})
 
+
 def debug(request):
     todisplay = 'hello world debug'
     return render(request,'debug.html', {'todisplay':todisplay})
- 
+
+
 def play(request,id):
     # get actual selected radio if exist
     try:
@@ -80,6 +78,7 @@ def play(request,id):
     player = Player()
     player.play(radio)
     return redirect('webgui.views.homepage')
+
 
 def stop(request):
     player = Player()
@@ -105,6 +104,7 @@ def activeAlarmClock(request,id):
         
     alarmclock.save()
     return redirect('webgui.views.alarmclock')
+
 
 @csrf_exempt 
 def addalarmclock(request):
@@ -148,25 +148,35 @@ def addalarmclock(request):
         listradio = Webradio.objects.all()
         return render(request, 'addalarmclock.html', {'rangeHour': range(24),
                                                       'rangeMinute': range(60),
-                                                      'listradio':listradio})
-                                                      
+                                                      'listradio': listradio})
+
+
 def deleteAlarmClock(request,id):
     alarmclock = Alarmclock.objects.get(id=id)
     alarmclock.disable()
     alarmclock.delete()
     return redirect('webgui.views.alarmclock')
 
-# Volume stuff
 
 def volumeup(request,count):
-    subprocess.call(["/home/pi/Piclodio2/webgui/utils/picsound.sh","--up",count])
+    scriptPath = os.path.dirname(os.path.abspath(__file__))+"/utils/picsound.sh"
+    subprocess.call([scriptPath, "--up", count])
     return redirect('webgui.views.options')
+
+
 def volumedown(request,count):
-    subprocess.call(["/home/pi/Piclodio2/webgui/utils/picsound.sh","--down",count])
+    scriptPath = os.path.dirname(os.path.abspath(__file__))+"/utils/picsound.sh"
+    subprocess.call([scriptPath, "--down", count])
     return redirect('webgui.views.options')
+
+
 def volumeset(request,volume):
-    subprocess.call(["/home/pi/Piclodio2/webgui/utils/picsound.sh","--setLevel",volume])
+    scriptPath = os.path.dirname(os.path.abspath(__file__))+"/utils/picsound.sh"
+    subprocess.call([scriptPath, "--setLevel", volume])
     return redirect('webgui.views.options')
+
+
 def volumetmute(request):
-    subprocess.call(["/home/pi/Piclodio2/webgui/utils/picsound.sh","--toggleSwitch"])
+    scriptPath = os.path.dirname(os.path.abspath(__file__))+"/utils/picsound.sh"
+    subprocess.call([scriptPath, "--toggleSwitch"])
     return redirect('webgui.views.options')
