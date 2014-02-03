@@ -61,24 +61,27 @@ www-data ALL=NOPASSWD:/usr/bin/mplayer* ,/usr/bin/pgrep mplayer ,/usr/bin/killal
 
 That's it! Piclodio is now available on it IP adresse.
 
-Option 2 : use django to run piclodio
+Option 2 : use django's server to run piclodio
 ==========
 
 As pi user :
 
-Create a new screen :
-```
-screen -R piclodio
-```
-
-Launch piclodio :
+Get Piclodio
 ```
 cd /home/pi
 git clone https://github.com/Sispheor/Piclodio2.git
-cd Piclodio2
-python manage.py runserver 0.0.0.0:8000
 ```
-
-Now you can exit your screen with ctrlA-D and access your piclodio at http://youip:8000
+Copy the starter script
+```
+cp Piclodio2/init_script/piclodio.sh /etc/init.d/piclodio
+chmod +x /etc/init.d/piclodio
+update-rc.d piclodio defaults
+```
+You can edit the file if you want to customise settings
+Start piclodio :
+```
+/etc/init.d/piclodio start
+```
+That's it, you can now access your piclodio at http://youip:8000
 
 ==========
