@@ -6,6 +6,7 @@ import time
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 import json
+import os
 from django.core.urlresolvers import reverse
 import subprocess
 from django.templatetags.static import static
@@ -20,9 +21,9 @@ def homepage(request):
         radio = None
     player = Player()
     listalarmclock = Alarmclock.objects.all()
-    return render(request,'homepage.html',{ 'radio': radio,
-                                            'player': player,
-                                            'listalarmclock':listalarmclock })
+    return render(request, 'homepage.html', {'radio': radio,
+                                             'player': player,
+                                             'listalarmclock': listalarmclock})
 
 #---------------------------------
 #   Show list of web radio in db
@@ -53,15 +54,13 @@ def deleteWebRadio(request,id):
     return redirect('webgui.views.webradio')
 
 def options(request):
-    #scriptPath = SITE_ROOT + 'webgui/utils/picsound.sh'
-    #currentVolume = subprocess.check_output([script,"--getLevel"])
-    currentVolume = subprocess.check_output(["/home/pi/Piclodio2/webgui/utils/picsound.sh","--getLevel"])
-    currentMute = subprocess.check_output(["/home/pi/Piclodio2/webgui/utils/picsound.sh","--getSwitch"])
-    #return render(request,'options.html', {'currentVolume':scriptPath,'currentMute':currentMute})
+    scriptPath = os.path.dirname(os.path.abspath(__file__))+"/utils/picsound.sh"
+    currentVolume = subprocess.check_output([scriptPath, "--getLevel"])
+    currentMute = subprocess.check_output([scriptPath, "--getSwitch"])
     return render(request,'options.html', {'currentVolume':currentVolume,'currentMute':currentMute})
 
 def debug(request):
-    todisplay = 'hello world debug';
+    todisplay = 'hello world debug'
     return render(request,'debug.html', {'todisplay':todisplay})
  
 def play(request,id):
@@ -128,7 +127,7 @@ def addalarmclock(request):
         alarmclock.hour     = hour
         alarmclock.minute   = minute
         alarmclock.period   = dayofweek
-	alarmclock.snooze   = snooze
+        alarmclock.snooze   = snooze
         webradio = Webradio.objects.get(id=id_webradio)
         alarmclock.webradio = webradio
         alarmclock.active=True
