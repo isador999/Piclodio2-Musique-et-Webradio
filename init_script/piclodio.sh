@@ -16,9 +16,9 @@
 # Name for display
 NAME=PICLODIO
 # path to the piclodio manage.py
-DAEMON=/home/nico/NetBeansProjects/Piclodio2/manage.py
+DAEMON=/home/pi/Piclodio2/manage.py
 # User who run piclodio
-RUN_AS='nico'
+RUN_AS='pi'
 # PID file location
 PIDFILE=/var/run/$NAME.pid
 # Port open
