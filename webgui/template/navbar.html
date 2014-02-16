@@ -1,5 +1,5 @@
 <!-- Navbar -->
 <nav class="navbar navbar-default navbar-static-top" role="navigation">
     <a class="navbar-brand" href="{% url 'webgui.views.homepage' %}">Piclodio</a><p class="navbar-text">{{ namepage }}</p>
-    <button style="float: right;margin-right:20px" type="button" class="btn btn-default navbar-btn">Options</button>
+    <a href="{% url 'webgui.views.options' %}" class="btn btn-default navbar-btn pull-right" style="margin-right:15px;">Options</a>
 </nav>
