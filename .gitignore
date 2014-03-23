@@ -5,3 +5,4 @@ local_settings.py
 piclodio.db
 piclodio/settings.py
 .idea
+newcron.txt
