@@ -3,6 +3,7 @@ import subprocess
 import os
 import string
 from webgui.crontab import *
+import threading
 
 
 class Webradio(models.Model):
@@ -44,34 +45,33 @@ class Alarmclock(models.Model):
         cron.remove()
 
 
-class Player():
+class Player(threading.Thread):
     """
     Class to play music with mplayer
     """
     def __init__(self):
         self.status = self.isStarted()
+        self.stdout = None
+        self.stderr = None
+        threading.Thread.__init__(self)
+        self.url = None
         
-    def isStarted(self):
-        # check number of process
-        p = subprocess.Popen("sudo pgrep mplayer", stdout=subprocess.PIPE, shell=True)
-        (output, err) = p.communicate()
-        if output == "":
-                return False
-        else:
-                return True
-            
-    def play(self, radio):
+    def run(self):
         # kill process if already running
         if self.isStarted:
             self.stop()
         
-        url = radio.url  # get the url
-        spliturl = string.split(url, ".")
+        spliturl = string.split(self.url, ".")
         sizetab = len(spliturl)
         extension = spliturl[sizetab-1]
         command = self.getthegoodcommand(extension)
-        
-        p = subprocess.Popen(command+radio.url, shell=True)    
+        command = command+self.url
+        p = subprocess.Popen(command.split(),
+                             shell=False,
+                             stdout=subprocess.PIPE,
+                             stderr=subprocess.PIPE)
+
+        self.stdout, self.stderr = p.communicate()
 
     def stop(self):
         """
@@ -88,3 +88,12 @@ class Player():
             'asx': "sudo /usr/bin/mplayer -playlist "
 
         }.get(extension, "sudo /usr/bin/mplayer ")  # default is mplayer
+
+    def isStarted(self):
+            # check number of process
+            p = subprocess.Popen("sudo pgrep mplayer", stdout=subprocess.PIPE, shell=True)
+            (output, err) = p.communicate()
+            if output == "":
+                    return False
+            else:
+                    return True

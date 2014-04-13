@@ -18,4 +18,13 @@ if snooze != 0:
 
 #Play the radio
 player = Player()
-player.play(ac.webradio)
+player.url = ac.webradio.url
+player.start()
+player.join()
+
+# check if web radio available, play mp3 if not
+if "No stream found" in player.stderr:
+    player = Player()
+    player.url = 'bluefunk.mp3'
+    player.start()
+    player.join()
