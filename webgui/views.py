@@ -78,14 +78,15 @@ def play(request, id):
     player = Player()
     player.url = radio.url
     player.start()
-    player.join()
 
-    # check if web radio available, play mp3 if not
-    if "No stream found" in player.stderr:
+    time.sleep(2)
+    if player.is_alive():
+        print "is alive"
+    else:
+        print "not alive"
         player = Player()
-        player.url = 'bluefunk.mp3'
+        player.url = 'mplayer bluefunk.mp3'
         player.start()
-        player.join()
 
     return redirect('webgui.views.homepage')
 

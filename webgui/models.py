@@ -4,6 +4,7 @@ import os
 import string
 from webgui.crontab import *
 import threading
+import time
 
 
 class Webradio(models.Model):
@@ -65,7 +66,7 @@ class Player(threading.Thread):
         sizetab = len(spliturl)
         extension = spliturl[sizetab-1]
         command = self.getthegoodcommand(extension)
-        command = command+self.url
+        command += self.url
         p = subprocess.Popen(command.split(),
                              shell=False,
                              stdout=subprocess.PIPE,
