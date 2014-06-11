@@ -64,7 +64,7 @@ def play(request, id):
     try:
         selectedradio = Webradio.objects.get(selected=1)
         # unselect it
-        selectedradio.selected=False
+        selectedradio.selected = False
         selectedradio.save()
     except Webradio.DoesNotExist:
         selectedradio = None    
@@ -73,8 +73,21 @@ def play(request, id):
     radio = Webradio.objects.get(id=id)
     radio.selected = True
     radio.save()
+    #player = Player()
+    #player.play(radio)
     player = Player()
-    player.play(radio)
+    player.url = radio.url
+    player.start()
+
+    time.sleep(2)
+    if player.is_alive():
+        print "is alive"
+    else:
+        print "not alive"
+        player = Player()
+        player.url = 'mplayer bluefunk.mp3'
+        player.start()
+
     return redirect('webgui.views.homepage')
 
 
