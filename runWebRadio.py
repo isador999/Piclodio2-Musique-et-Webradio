@@ -6,7 +6,7 @@ import time
 os.environ['DJANGO_SETTINGS_MODULE'] = 'piclodio.settings'
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(SITE_ROOT)
-from webgui.models import Alarmclock, Player
+from webgui.models import *
 
 #Getting Alarmclock object from database
 acid = sys.argv[1]
