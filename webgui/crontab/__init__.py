@@ -23,7 +23,7 @@ class Crontab:
         line = str(self.minute)+" "+str(self.hour)+" "+str(self.period)+"  * * "+str(self.command)+" #"+str(self.comment)
         mycron.append(line)
         # write it in a temp file
-        f = open("newcron.txt", "w")
+        f = open("/tmp/newcron.txt", "w")
         for line in mycron:
             f.write(line)
             f.write('\n')
@@ -38,7 +38,7 @@ class Crontab:
         mycron = self.__getactualcrontab()
 
         # open temp file
-        f = open("newcron.txt", "w")
+        f = open("/tmp/newcron.txt", "w")
 
         # locate the line
         for line in mycron:
@@ -62,7 +62,7 @@ class Crontab:
         mycron = self.__getactualcrontab()
 
         # open temp file
-        f = open("newcron.txt", "w")
+        f = open("/tmp/newcron.txt", "w")
 
         # locate the line
         for line in mycron:
@@ -96,7 +96,7 @@ class Crontab:
                 newcron.append('\n')
 
         # open temp file
-        f = open("newcron.txt", "w")
+        f = open("/tmp/newcron.txt", "w")
         for line in newcron:
             f.write(line)
         # close temp file
@@ -115,7 +115,7 @@ class Crontab:
     def __writecrontab(self):
         """ Write the temp file into the crontab  """
         # save the crontab from the temp file
-        p = subprocess.Popen("crontab newcron.txt", stdout=subprocess.PIPE, shell=True)
+        p = subprocess.Popen("crontab /tmp/newcron.txt", stdout=subprocess.PIPE, shell=True)
         p.communicate()
 
     def __isenable(self):
