@@ -26,7 +26,7 @@ class Crontab:
         f = open("newcron.txt", "w")
         for line in mycron:
             f.write(line)
-	    f.write('\n')
+            f.write('\n')
 
         f.close()
         # write the crontab
