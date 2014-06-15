@@ -8,6 +8,7 @@ SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(SITE_ROOT)
 from webgui.models import *
 
+print SITE_ROOT
 #Getting Alarmclock object from database
 acid = sys.argv[1]
 ac = Alarmclock.objects.get(id=acid)
@@ -21,13 +22,13 @@ if snooze != 0:
 #Play the radio
 player = Player()
 player.url = ac.webradio.url
-player.start()
+player.run()
 # wait 2 seconds and then cheek if the radio is running
 time.sleep(2)
-if player.is_alive():
+if player.isStarted():
     print "is alive"
 else:
     print "not alive"
     player = Player()
-    player.url = 'mplayer bluefunk.mp3'
-    player.start()
+    player.url = 'mplayer -loop 0 backup.mp3'
+    player.run()

@@ -46,7 +46,7 @@ class Alarmclock(models.Model):
         cron.remove()
 
 
-class Player(threading.Thread):
+class Player():
     """
     Class to play music with mplayer
     """
@@ -54,7 +54,7 @@ class Player(threading.Thread):
         self.status = self.isStarted()
         self.stdout = None
         self.stderr = None
-        threading.Thread.__init__(self)
+        # threading.Thread.__init__(self)
         self.url = None
         
     def run(self):
@@ -67,12 +67,16 @@ class Player(threading.Thread):
         extension = spliturl[sizetab-1]
         command = self.getthegoodcommand(extension)
         command += self.url
-        p = subprocess.Popen(command.split(),
-                             shell=False,
-                             stdout=subprocess.PIPE,
-                             stderr=subprocess.PIPE)
+	print command
 
-        self.stdout, self.stderr = p.communicate()
+        p = subprocess.Popen(command, shell=True)
+
+        # p = subprocess.Popen(command.split(),
+        #                      shell=False,
+        #                      stdout=subprocess.PIPE,
+        #                      stderr=subprocess.PIPE)
+
+        # self.stdout, self.stderr = p.communicate()
 
     def stop(self):
         """
