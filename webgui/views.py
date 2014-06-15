@@ -158,6 +158,7 @@ def addalarmclock(request):
         listradio = Webradio.objects.all()
         return render(request, 'addalarmclock.html', {'rangeHour': range(24),
                                                       'rangeMinute': range(60),
+						      'rangeSnooze': range(121),
                                                       'listradio': listradio})
 
 

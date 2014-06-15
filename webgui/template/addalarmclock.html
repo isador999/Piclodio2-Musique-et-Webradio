@@ -87,7 +87,7 @@
                     <label for="time" class="col-sm-2 control-label">Auto stop</label> 
                     <div class="col-sm-1">
                        <select id="snooze" class="form-control">
-                            {% for i in rangeMinute %}
+                            {% for i in rangeSnooze %}
                                 <option value="{{ i }}">
                                     {% if i < 10 %}
                                         0{{i}}
