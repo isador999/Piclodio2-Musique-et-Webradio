@@ -20,7 +20,7 @@ class Crontab:
         # get actual crontab
         mycron = self.__getactualcrontab()
         # add the new line the the end
-        line = str(self.minute)+" "+str(self.hour)+" "+str(self.period)+"  * * "+str(self.command)+" #"+str(self.comment)
+        line = str(self.minute)+" "+str(self.hour)+" * * "+str(self.period)+" "+str(self.command)+" #"+str(self.comment)
         mycron.append(line)
         # write it in a temp file
         f = open("/tmp/newcron.txt", "w")
