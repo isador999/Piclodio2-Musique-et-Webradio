@@ -30,5 +30,6 @@ if player.isStarted():
 else:
     print "not alive"
     player = Player()
-    player.url = 'mplayer -loop 0 backup.mp3'
-    player.run()
+    radio = Webradio
+    radio.url = 'mplayer -loop 0 backup.mp3'
+    player.play(radio)
