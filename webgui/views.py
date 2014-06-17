@@ -73,20 +73,16 @@ def play(request, id):
     radio = Webradio.objects.get(id=id)
     radio.selected = True
     radio.save()
-    #player = Player()
-    #player.play(radio)
     player = Player()
-    player.url = radio.url
-    player.start()
+    player.play(radio)
 
     time.sleep(2)
-    if player.is_alive():
-        print "is alive"
-    else:
-        print "not alive"
+
+    if not player.isStarted():  # then start the backup mp3
         player = Player()
-        player.url = 'mplayer bluefunk.mp3'
-        player.start()
+        radio = Webradio
+        radio.url = 'mplayer backup.mp3'
+        player.play(radio)
 
     return redirect('webgui.views.homepage')
 
@@ -150,7 +146,7 @@ def addalarmclock(request):
 
         # return the base URL of current instance
         url = request.build_absolute_uri('alarmclock')
-        print url
+
         json_data = json.dumps({"HTTPRESPONSE":url})
         return HttpResponse(json_data, mimetype="application/json")
     
@@ -158,7 +154,7 @@ def addalarmclock(request):
         listradio = Webradio.objects.all()
         return render(request, 'addalarmclock.html', {'rangeHour': range(24),
                                                       'rangeMinute': range(60),
-						      'rangeSnooze': range(121),
+                                                      'rangeSnooze': range(121),
                                                       'listradio': listradio})
 
 

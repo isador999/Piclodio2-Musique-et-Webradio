@@ -52,31 +52,19 @@ class Player():
     """
     def __init__(self):
         self.status = self.isStarted()
-        self.stdout = None
-        self.stderr = None
-        # threading.Thread.__init__(self)
-        self.url = None
-        
-    def run(self):
+
+    def play(self, radio):
         # kill process if already running
-        if self.isStarted:
+        if self.isStarted():
             self.stop()
-        
-        spliturl = string.split(self.url, ".")
-        sizetab = len(spliturl)
-        extension = spliturl[sizetab-1]
-        command = self.getthegoodcommand(extension)
-        command += self.url
-	print command
 
-        p = subprocess.Popen(command, shell=True)
+        url = radio.url  # get the url
+        splitUrl =string.split(url, ".")
+        sizeTab= len(splitUrl)
+        extension=splitUrl[sizeTab-1]
+        command= self.getthegoodcommand(extension)
 
-        # p = subprocess.Popen(command.split(),
-        #                      shell=False,
-        #                      stdout=subprocess.PIPE,
-        #                      stderr=subprocess.PIPE)
-
-        # self.stdout, self.stderr = p.communicate()
+        p = subprocess.Popen(command+radio.url, shell=True)
 
     def stop(self):
         """

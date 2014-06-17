@@ -21,8 +21,8 @@ if snooze != 0:
 
 #Play the radio
 player = Player()
-player.url = ac.webradio.url
-player.run()
+radio = ac.webradio
+player.play(radio)
 # wait 2 seconds and then cheek if the radio is running
 time.sleep(2)
 if player.isStarted():
