@@ -34,7 +34,7 @@ class Alarmclock(models.Model):
         cron.hour = self.hour
         cron.period = self.period
         cron.comment = "piclodio "+str(self.id)
-        cron.command = "python "+base_dir+"/runWebRadio.py "+str(self.id)
+        cron.command = "env DISPLAY=:0.0 python "+base_dir+"/runWebRadio.py "+str(self.id)
         cron.create()
 
     def disable(self):
