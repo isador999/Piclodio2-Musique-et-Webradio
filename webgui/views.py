@@ -8,6 +8,7 @@ from django.http import HttpResponse
 import json
 import os
 import subprocess
+from time import gmtime, strftime
 
 
 def homepage(request):
@@ -17,9 +18,12 @@ def homepage(request):
         radio = None
     player = Player()
     listalarmclock = Alarmclock.objects.all()
+    # clock
+    clock = strftime("%H:%M:%S")
     return render(request, 'homepage.html', {'radio': radio,
                                              'player': player,
-                                             'listalarmclock': listalarmclock})
+                                             'listalarmclock': listalarmclock,
+                                             'clock': clock})
 
 
 def webradio(request):

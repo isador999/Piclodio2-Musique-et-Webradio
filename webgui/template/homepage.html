@@ -2,6 +2,8 @@
 <html>
   <!-- Head -->
   {% include 'head.html' %}
+  <!-- clock js -->
+  <script src="{{ STATIC_URL }}clock.js"></script>
   <body>
     <!-- Navbar -->
     {% with "Home" as namepage  %}
@@ -12,10 +14,8 @@
         <fieldset class="scheduler-border">
             <legend class="scheduler-border"><a href="{% url 'webgui.views.homepage' %}" style="margin-bottom: 3px" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-refresh"></span></a>  Rpi date and time</legend>
             <div style="text-align: center">
-                
-                <strong class="text-primary">{% now "H:i" %}</strong></br>
-                <strong class="text-primary">{% now "jS F Y" %}</strong> 
-            </div>    
+                <strong class="text-primary"><div id="clock">{{ clock }}</div></strong>
+            </div>
         </fieldset>
         </br>
         <fieldset class="scheduler-border">
