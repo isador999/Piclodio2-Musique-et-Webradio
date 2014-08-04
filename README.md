@@ -11,7 +11,7 @@ Prerequisites
 Django Framework
 
 ```
-pip install Django==1.6
+sudo pip install Django==1.6
 ```
 
 or
@@ -41,14 +41,14 @@ git clone https://github.com/Sispheor/Piclodio2.git
 ```
 Copy the starter script
 ```
-cp Piclodio2/init_script/piclodio.sh /etc/init.d/piclodio
-chmod +x /etc/init.d/piclodio
-update-rc.d piclodio defaults
+sudo cp Piclodio2/init_script/piclodio.sh /etc/init.d/piclodio
+sudo chmod +x /etc/init.d/piclodio
+sudo update-rc.d piclodio defaults
 ```
 You can edit the file if you want to customise settings
 Start piclodio :
 ```
-/etc/init.d/piclodio start
+sudo /etc/init.d/piclodio start
 ```
 That's it, you can now access your piclodio at http://youip:8000
 
