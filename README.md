@@ -10,6 +10,9 @@ I try to add some functionnalities :
 
 
 
+
+
+
 ![alt tag](https://raw.github.com/Sispheor/Piclodio2/master/img/piclodio_home.png)
 
 
