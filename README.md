@@ -3,7 +3,7 @@ Piclodio2
 
 
 Piclodio2 is a web radio player and an alarm clock created here : https://github.com/Sispheor/
-...
+
 I try to add some functionnalities : 
 - On Homepage, launch a music chosen randomly
 - Choose the type of the AlarmClock : Webradio OR Random music
