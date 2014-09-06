@@ -8,10 +8,11 @@ I try to add some functionnalities :
 - On Homepage, launch a music chosen randomly
 - Choose the type of the AlarmClock : Webradio OR Random music
 - Eventually, have the possibility of adding music on a Web page (from computer to Raspberry PI)
- 
- 
+
+
  
 ![alt tag](https://raw.github.com/Sispheor/Piclodio2/master/img/piclodio_home.png)
+
 
 
 
