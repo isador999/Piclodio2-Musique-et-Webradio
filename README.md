@@ -1,5 +1,5 @@
-Piclodio2
-=========
+Piclodio2 with Local Music & WebRadio
+=====================================
 
 
 Piclodio2 is a web radio player and an alarm clock created here : https://github.com/Sispheor/Piclodio2
