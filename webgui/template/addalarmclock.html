@@ -69,6 +69,16 @@
                     </div>
                 </div>
                 
+
+		<!-- The following <th> block returns error about arguments on the page  ##  Added by Isador -->
+		<!-- "Exception : Reverse for 'webgui.views.typeAlarmClock' with arguments '('',)' and keyword arguments '{}' not found. 1 pattern(s) tried: ['typeAlarmClock/$']"	-->
+
+		<th>
+                        <a href="{% url 'webgui.views.typeAlarmClock' alarmclock.id %}"style="margin-bottom: 3px" type="button" class="btn btn-{% if alarmclock.active == True %}primary{% else %}default{% endif %} btn-sm">
+                            <span class="glyphicon {% if alarmclock.active == True %}glyphicon-check{% else %}glyphicon-unchecked{% endif %}"></span>
+                        </a>
+                </th>
+
                 <!-- Set web radio -->
                 <div class="form-group">
                     <label for="time" class="col-sm-2 control-label">Web radio</label>

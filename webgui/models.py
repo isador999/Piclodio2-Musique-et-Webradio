@@ -23,6 +23,9 @@ class Alarmclock(models.Model):
     active = models.BooleanField()
     snooze = models.IntegerField(blank=True)
     webradio = models.ForeignKey(Webradio)
+    type = models.TextField(null=False, blank=False)
+
+
 
     def enable(self):
         """
@@ -37,6 +40,21 @@ class Alarmclock(models.Model):
         cron.command = "env DISPLAY=:0.0 python "+base_dir+"/runWebRadio.py "+str(self.id)
         cron.create()
 
+    ##### Add Crontab Line for Music ##### Added by Isador
+    def enablemusic(self):
+        """
+        enable The alarm clock. Set it into the crontab
+        """
+        base_dir = os.path.dirname(os.path.dirname(__file__))
+        cron = Crontab()
+        cron.minute = self.minute
+        cron.hour = self.hour
+        cron.period = self.period
+        cron.comment = "piclodio-music "+str(self.id)
+        cron.command = "env DISPLAY=:0.0 python "+base_dir+"/random-music.sh "+str(self.id)
+        cron.create()
+
+
     def disable(self):
         """
         disable the alarm clock. remove it from the crontab
@@ -44,6 +62,16 @@ class Alarmclock(models.Model):
         cron = Crontab()
         cron.comment = "piclodio "+str(self.id)
         cron.remove()
+
+    ##### Disable the Crontab Line for Music ##### Added by Isador
+    def disablemusic(self):
+        """
+        disable the alarm clock. remove it from the crontab
+        """
+        cron = Crontab()
+        cron.comment = "piclodio-music "+str(self.id)
+        cron.remove()
+
 
 
 class Player():

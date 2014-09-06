@@ -17,6 +17,10 @@ urlpatterns = patterns('',
     url(r'^stop/$','webgui.views.stop'),
     url(r'^alarmclock/$','webgui.views.alarmclock'),
     url(r'^activeAlarmClock/(\d+)/$','webgui.views.activeAlarmClock'),
+
+    ### URL for Clock Type (Music / Webradio) ### Added by Isador
+    url(r'^typeAlarmClock/$','webgui.views.typeAlarmClock'),
+
     url(r'^addalarmclock$','webgui.views.addalarmclock'),
     url(r'^deleteAlarmClock/(\d+)/$','webgui.views.deleteAlarmClock'),
     url(r'^options/$','webgui.views.options'),

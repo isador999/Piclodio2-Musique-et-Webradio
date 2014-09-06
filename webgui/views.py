@@ -104,6 +104,19 @@ def alarmclock(request):
     return render(request, 'alarmclock.html',{'listAlarm': listAlarm})
 
 
+#### type of AlarmClock (Music / Webradio) ####  Added by Isador
+def typeAlarmClock(request,id):
+    typeAlarm = Alarmclock.objects.get(id=id)
+    if (typeAlarm.type==reveil):
+        typeAlarm.enablemusic()
+    else:
+        typeAlarm.type==webradio
+        typeAlarm.disablemusic()
+    typeAlarm.save()
+    return redirect('webgui.views.typeAlarmClock')
+
+
+
 def activeAlarmClock(request, id):
     alarmclock = Alarmclock.objects.get(id=id)
     if not alarmclock.active:
