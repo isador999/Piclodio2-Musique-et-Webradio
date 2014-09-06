@@ -10,7 +10,9 @@ I try to add some functionnalities :
 - Eventually, have the possibility of adding music on a Web page (from computer to Raspberry PI)
 
 
- 
+
+
+
 ![alt tag](https://raw.github.com/Sispheor/Piclodio2/master/img/piclodio_home.png)
 
 
