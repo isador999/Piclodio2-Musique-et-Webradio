@@ -10,6 +10,10 @@ I try to add some functionnalities :
 - Eventually, have the possibility of adding music on a Web page (from computer to Raspberry PI)
 
 
+This project uses the Django Framework with systems of templates, views, urls, ... 
+I'm not a developper and actually, I don't understand some application mechanisms (errors about HTML templates, particularly).
+
+If you're interested by this project, do not hesitate to contact me to help me to correct my code.
 
 
 
