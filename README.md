@@ -14,7 +14,7 @@ This project uses the Django Framework with systems of templates, views, urls, .
 
 I'm not a developper and I don't understand some application mechanisms (errors about HTML templates, particularly).
 
-If you're interested by this project, do not hesitate to contact me to help me to correct my code.
+If you're interested by this project, do not hesitate to contact me to help me to correct and add code.
 
 
 
