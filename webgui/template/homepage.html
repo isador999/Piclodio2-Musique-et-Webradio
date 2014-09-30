@@ -74,6 +74,20 @@
                 </div>
             {% endif %}  
         </fieldset>    
+
+
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border"><a href="{% url 'webgui.views.music' %}" style="margin-bottom: 3px" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-cog"></span></a>  Musique aléatoire </legend>
+            <p style="text-align: center;"class="lead {% if player.status == True %}text-primary{% endif %}">{{music.name}}</p>
+            {% if music = None  %}
+                <div class="btn-group btn-group-justified" style="margin-bottom: 20px">
+                    <a href="{% url 'webgui.views.playmusicrandom' %}" id="play" class="btn btn-{% if player.status == True %}primary{% else %}default{% endif %} btn-lg">Play</a>
+                    <a href="{% url 'webgui.views.stop' %}" id="stop" class="btn btn-{% if player.status == False %}primary{% else %}default{% endif %} btn-lg">Stop</a>
+                </div>
+            {% endif %}
+        </fieldset>    
+
+
     </div>
     
   </body>

@@ -14,6 +14,19 @@ function dayClicked(dayButton){
     
 }
 
+
+function tClicked(tButton){
+    var btn = document.getElementById(tButton); 
+    if (btn.className== "btn btn-default"){
+        btn.className= "btn btn-primary";
+    }else{
+        btn.className= "btn btn-default";
+    }
+    
+}
+
+
+
 function goAddAlarmClock(){
     // get all selection
     var label   = document.getElementById("label").value;
@@ -36,13 +49,31 @@ function goAddAlarmClock(){
         }
     }
     
+
+
+    var type="";
+    var premier = 0;
+    var choice = ["musicButton", "radioButton"]
+    for (var i=0;i<choice.length;i++){
+    	var tButton = document.getElementById(choice[i]);
+	if(tButton.className == "btn btn-primary"){
+	    if (premier == 0){
+	        type+= i.toString();
+		premier =1;
+	    }else{
+		type+= ","+i.toString();
+	    }
+	}
+    }
+
+
     // send all of that shit to the server
     $.ajax({
         type: "POST",               
         url: "addalarmclock",
         dataType: "json",
         traditional: true,
-        data: {label: label,hour: hour,minute:minute, snooze:snooze, webradio:webradio,dayofweek:dayofweek },
+        data: {label: label,hour: hour,minute:minute, snooze:snooze, webradio:webradio,dayofweek:dayofweek,type:type },
         success: function(data){ 
             if (data["HTTPRESPONSE"]=="error"){
                 $("#message").html("<strong>Oh snap! </strong> Change a few things up and try submitting again.");

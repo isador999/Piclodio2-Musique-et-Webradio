@@ -7,6 +7,20 @@ import threading
 import time
 
 
+    #### type # Added here and in SQLITE by Isador ####
+class Music(models.Model):
+    id = models.IntegerField(primary_key=True, blank=True)
+#   track = models.CharField(max_length=40)
+#   artist = models.CharField(max_length=40)
+    name = models.CharField(max_length=60)
+    path = models.CharField(max_length=60)
+    selected = models.BooleanField(default=False)  # is the Music selected to be played
+
+
+    def __unicode__(self):
+	return self.name
+
+
 class Webradio(models.Model):
     id = models.IntegerField(primary_key=True, blank=True)
     name = models.CharField(max_length=100)
@@ -23,7 +37,9 @@ class Alarmclock(models.Model):
     active = models.BooleanField()
     snooze = models.IntegerField(blank=True)
     webradio = models.ForeignKey(Webradio)
-    type = models.TextField(null=False, blank=False)
+    #### type # Added here and in SQLITE by Isador ####
+    music = models.ForeignKey(Music)
+    type = models.TextField(default='music')
 
 
 
@@ -93,6 +109,17 @@ class Player():
         command= self.getthegoodcommand(extension)
 
         p = subprocess.Popen(command+radio.url, shell=True)
+
+
+
+    def playmusic(self, path):
+	if self.isStarted():
+            self.stop()
+	command = "sudo /usr/bin/mplayer "
+	p = subprocess.Popen(command+path, shell=True)
+
+
+
 
     def stop(self):
         """

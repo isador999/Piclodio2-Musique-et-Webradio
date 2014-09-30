@@ -74,12 +74,12 @@ case $1 in
                 exit
                 ;;
 	--up)
-		level=$(($(getCurrentLevel) + $2))
+		level=$($(getCurrentLevel) + $2)
                 amixer cset numid=$(getIdPlaybackVolume) $level%
 		exit
 		;;
 	--down)
-		level=$(($(getCurrentLevel) - $2))
+		level=$($(getCurrentLevel) - $2)
                 amixer cset numid=$(getIdPlaybackVolume) $level%
 		exit
 		;;

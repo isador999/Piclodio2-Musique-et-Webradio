@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 from django.shortcuts import render, redirect
-from webgui.models import Webradio, Player, Alarmclock
-from webgui.forms import WebradioForm
+from webgui.models import Webradio, Player, Alarmclock, Music
+from webgui.forms import WebradioForm, MusicForm
 import time
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
@@ -9,6 +9,11 @@ import json
 import os
 import subprocess
 from time import gmtime, strftime
+from django.core.files import File
+import sqlite3
+import random
+
+
 
 
 def homepage(request):
@@ -45,10 +50,48 @@ def addwebradio(request):
     return render(request, 'addwebradio.html', {'form': form})
 
 
+def addmusic(request):
+    save = False
+
+    if request.method == "POST":
+	form = MusicForm(request.POST, request.FILES)
+	if form.is_valid():
+		music = Music()
+		music.name = form.cleaned_data["name"]
+		music.path = form.cleaned_data["path"]
+		music.fichier = form.cleaned_data["fichier"]
+		music.save()
+
+		save = True
+		return redirect('webgui.views.music')
+    else:
+	form = MusicForm()
+    return render(request, 'addmusic.html', locals())
+#    if request.method == 'POST':  # If the form has been submitted...
+#        form = MusicForm(request.POST)  # A form bound to the POST data
+#        if form.is_valid():  # All validation rules pass
+            # save web radio
+#            form.instance.selected = False
+#            form.save()
+#            return redirect('webgui.views.music')
+#    else:
+#        form = MusicForm() # An unbound form
+
+#    return render(request, 'addmusic.html', {'form': form})
+
+
+
 def deleteWebRadio(request, id):
     radio = Webradio.objects.get(id=id)
     radio.delete()
     return redirect('webgui.views.webradio')
+
+
+def deleteMusic(request, id):
+    music = Music.objects.get(id=id)
+    music.delete()
+    return redirect('webgui.views.music')
+
 
 
 def options(request):
@@ -105,29 +148,85 @@ def alarmclock(request):
 
 
 #### type of AlarmClock (Music / Webradio) ####  Added by Isador
-def typeAlarmClock(request,id):
-    typeAlarm = Alarmclock.objects.get(id=id)
-    if (typeAlarm.type==reveil):
-        typeAlarm.enablemusic()
-    else:
-        typeAlarm.type==webradio
-        typeAlarm.disablemusic()
-    typeAlarm.save()
-    return redirect('webgui.views.typeAlarmClock')
+#def typeAlarmClock(request):
+#    typeAlarm = Alarmclock.objects.get(type)
+#    if (typeAlarm.type==music):
+#	MusicAlarm = True
+#	RadioAlarm = False
+#        typeAlarm.enablemusic()
+#    else:
+#        typeAlarm.type==webradio
+#	RadioAlarm = True
+#	MusicAlarm = False
+#        typeAlarm.disablemusic()
+#    typeAlarm.save()
+#    return redirect('webgui.views.alarmclock')
+
+
+def music(request):
+    listmusic = Music.objects.all()
+#   print listmusic
+    return render(request, 'music.html',{'listmusic': listmusic})
 
 
 
-def activeAlarmClock(request, id):
+def playmusic(request, id):
+    music = Music.objects.get(id=id)
+    conn = sqlite3.connect("/var/www/Piclodio2/piclodio.db")
+    cur = conn.cursor()
+
+    cur.execute("SELECT path FROM webgui_music WHERE id=?", str(id))
+    path = cur.fetchone()[0]
+
+    player = Player()
+    player.playmusic(path)
+
+    return redirect('webgui.views.music')  
+
+
+
+def playmusicrandom(request):
+    conn = sqlite3.connect("/var/www/Piclodio2/piclodio.db")
+    cur = conn.cursor()
+    cur.execute("SELECT COUNT(*) FROM webgui_music")
+    rows = cur.fetchone()[0]
+
+    selected_row = random.randint(1, rows)
+
+    cur.execute("SELECT path FROM webgui_music WHERE id=?", str(selected_row))
+    path = cur.fetchone()[0]
+
+    player = Player()
+    player.playmusic(path)
+
+    return redirect('webgui.views.homepage')
+
+
+def activeAlarmClock(request, id, type):
+    typealarm = Alarmclock.objects.get(type=type)
     alarmclock = Alarmclock.objects.get(id=id)
-    if not alarmclock.active:
-        alarmclock.active = True
-        alarmclock.enable()
+
+
+    if typealarm == "radio":
+	if not alarmclock.active:
+	    alarmclock.active = True
+	    alarmclock.enable()
+	else:
+	    alarmclock.active = False
+	    alarmclock.disable()
     else:
-        alarmclock.active = False
-        alarmclock.disable()
+	typealarm = "music"
+	if not alarmclock.active:
+	    alarmclock.active = True
+	    alarmclock.enablemusic()
+	else:
+	    alarmclock.active = False
+	    alarmclock.disablemusic()
         
     alarmclock.save()
+
     return redirect('webgui.views.alarmclock')
+
 
 
 @csrf_exempt 
@@ -139,9 +238,10 @@ def addalarmclock(request):
         snooze = request.POST['snooze']
         id_webradio = request.POST['webradio']
         dayofweek = request.POST['dayofweek']
-        
+        type = request.POST['type']
+    
         # check if label not empty and days selected
-        if label == "" or dayofweek == "":
+        if label == "" or dayofweek == "" or type == "":
             json_data = json.dumps({"HTTPRESPONSE": "error"})
             return HttpResponse(json_data, mimetype="application/json")
         
@@ -152,11 +252,19 @@ def addalarmclock(request):
         alarmclock.minute = minute
         alarmclock.period = dayofweek
         alarmclock.snooze = snooze
-        webradio = Webradio.objects.get(id=id_webradio)
-        alarmclock.webradio = webradio
-        alarmclock.active = True
-        alarmclock.save()
-        
+	alarmclock.type = type
+	if alarmclock.type == "music":
+
+	    webradio = Webradio.objects.get(id=id_webradio)
+	    alarmclock.webradio = webradio
+            alarmclock.active = True
+            alarmclock.save()
+        else:
+	    alarmclock.active = True
+	    alarmclock.save()
+	
+
+
         # set the cron
         alarmclock = Alarmclock.objects.latest('id')
         alarmclock.enable()
@@ -204,3 +312,4 @@ def volumetmute(request):
     scriptPath = os.path.dirname(os.path.abspath(__file__))+"/utils/picsound.sh"
     subprocess.call([scriptPath, "--toggleSwitch"])
     return redirect('webgui.views.options')
+

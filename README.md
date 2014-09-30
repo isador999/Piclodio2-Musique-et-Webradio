@@ -1,27 +1,9 @@
-Piclodio2 with Local Music & WebRadio
-=====================================
+Piclodio2
+=========
 
-
-Piclodio2 is a web radio player and an alarm clock created here : https://github.com/Sispheor/Piclodio2
-
-I try to add some functionnalities : 
-- On Homepage, launch a music chosen randomly
-- Choose the type of the AlarmClock : Webradio OR Random music
-- Eventually, have the possibility of adding music on a Web page (from computer to Raspberry PI)
-
-
-This project uses the Django Framework with systems of templates, views, urls, ... 
-
-I'm not a developper and I don't understand some application mechanisms (errors about HTML templates, particularly).
-
-If you're interested by this project, do not hesitate to contact me to help me to correct and add code.
-
-
+Piclodio2 is a web radio player and a also an alarm clock. You can add url stream to complete the collection. Scheduling alarm clock is easy and can be periodic.
 
 ![alt tag](https://raw.github.com/Sispheor/Piclodio2/master/img/piclodio_home.png)
-
-
-
 
 Prerequisites
 ==========

@@ -69,18 +69,6 @@
                     </div>
                 </div>
                 
-
-
-	        <div class="form-group">
-		    <label for="type" class="col-sm-2 control-label">Type</label>
-		    <div class="col-sm-7">
-		        <button id="musicButton" onclick="tClicked('musicButton')" type="button" style="width: 100px" class="btn btn-default">Music</button>
-			<button id="radioButton" onclick="tClicked('radioButton')" type="button" style="width: 100px" class="btn btn-default">Radio</button>
-		    </div>
-		</div>    
-
-
-
                 <!-- Set web radio -->
                 <div class="form-group">
                     <label for="time" class="col-sm-2 control-label">Web radio</label>

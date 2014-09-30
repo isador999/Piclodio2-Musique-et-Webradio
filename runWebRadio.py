@@ -23,7 +23,7 @@ if snooze != 0:
 player = Player()
 radio = ac.webradio
 player.play(radio)
-# wait 2 seconds and then cheek if the radio is running
+# wait 2 seconds and then check if the radio is running
 time.sleep(2)
 if player.isStarted():
     print "is alive"

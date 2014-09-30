@@ -13,6 +13,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 
+MEDIA_ROOT = '/srv/fichiers/'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -90,3 +91,4 @@ TEMPLATE_DIRS = (
 
     SITE_ROOT+'/../webgui/template/'
 )
+
