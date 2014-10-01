@@ -1,5 +1,26 @@
-Piclodio2
-=========
+Piclodio2-Musique-et-Webradio
+=============================
+
+Piclodio is a program created here : https://github.com/Sispheor/Piclodio2
+
+
+I tried to add some functionnalities : 
+  - Play a music randomly selected. 
+  - To be able to upload music file(s) via the Webgui. 
+  - Have the choice to launch Webradio or Music randomly with Alarmclock.
+
+
+01/10/2014 : 
+Now, I have two issues : 
+ 1 Buttons on addalarmclock HTML page works, but 'Save' button doesn't works with these new buttons. (JS problem, or Python problem.. )
+ 2 On the upload page, the POST form is sent, but no music file is present in folders (MEDIA_ROOT django) after upload ...
+ 
+Any help will be very nice ! 
+  
+
+############################################################################################################"""
+
+
 
 Piclodio2 is a web radio player and a also an alarm clock. You can add url stream to complete the collection. Scheduling alarm clock is easy and can be periodic.
 
