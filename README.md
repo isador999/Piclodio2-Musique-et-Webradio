@@ -15,7 +15,7 @@ Now, I have two issues :
 
 ___Buttons on addalarmclock HTML page works, but 'Save' button doesn't works with these new buttons. (JS problem, or Python problem.. )
  
-___On the upload page, the POST form is sent, but no music file is present in folders (MEDIA_ROOT django) after upload ...
+___On the upload music page, the POST form is sent, but no music file is present in folders (MEDIA_ROOT django) after upload ...
  
 Any help will be very nice ! 
   
