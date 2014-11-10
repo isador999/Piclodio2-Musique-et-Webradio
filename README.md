@@ -42,10 +42,14 @@ Mplayer, At, SQLite database, the web server and python module
 sudo apt-get install mplayer at sqlite3
 ```
 
-Create the following folders (needed to use the music upload)
-...
+Create the following folders (needed to use the music upload) : 
 
-<code> sudo mkdir -p /srv/fichiers/music/ </code>
+<code> 
+
+sudo mkdir -p /srv/fichiers/music/
+
+</code>
+
 
 
 Option 1 : use django's server to run piclodio
@@ -74,10 +78,14 @@ sudo /etc/init.d/piclodio start
 That's it, you can now access your piclodio at http://youip:8000
 
 Don't forget to place 'PI' rights on the music-upload folder : 
-...
 
-<code> sudo chown pi:pi -R /srv/fichiers/music/ </code>
-...
+<code> 
+
+sudo chown pi:pi -R /srv/fichiers/music/ 
+
+
+</code>
+
 
 
 Option 2 : run piclodio with apache
@@ -113,10 +121,13 @@ www-data ALL=NOPASSWD:/usr/bin/mplayer* ,/usr/bin/pgrep mplayer ,/usr/bin/killal
 ```
 
 Don't forget to place 'www-data' rights on the music-upload folder :
-...
 
-<code> chown www-data:www-data -R /srv/fichiers/music/  </code>
-...
+<code> 
+
+chown www-data:www-data -R /srv/fichiers/music/ 
+
+</code>
+
 
 That's it! Piclodio is now available on it IP adresse.
 
