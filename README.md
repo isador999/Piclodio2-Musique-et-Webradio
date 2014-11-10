@@ -4,17 +4,12 @@ I forked this project to add some features :
   - Play a music randomly selected. 
   - Set an alarm and choose the mode (Webradio / Music randomly selected). 
   - Create or delete artists. 
-  - Upload or delete some music associated to an artist. 
+  - Upload or delete music(s) associated to an artist. 
   
 
 Since 10/11/2014, this features perfectly works !
 
 Please contact me if you detect some bugs/errors, or if you have some ideas to improve this program :) 
-
-= =
-= =
-
-= =
 
 
 
@@ -47,6 +42,12 @@ Mplayer, At, SQLite database, the web server and python module
 sudo apt-get install mplayer at sqlite3
 ```
 
+Create the following folders (needed to use the music upload)
+...
+sudo mkdir -p /srv/fichiers/music/
+...
+
+
 Option 1 : use django's server to run piclodio
 ==========
 
@@ -57,7 +58,7 @@ As pi user :
 Get Piclodio
 ```
 cd /home/pi
-git clone https://github.com/Sispheor/Piclodio2.git
+git clone https://github.com/isador999/Piclodio2-Musique-et-Webradio.git
 ```
 Copy the starter script
 ```
@@ -71,6 +72,11 @@ Start piclodio :
 sudo /etc/init.d/piclodio start
 ```
 That's it, you can now access your piclodio at http://youip:8000
+
+Don't forget to place 'PI' rights on the music-upload folder : 
+...
+sudo chown pi:pi -R /srv/fichiers/music/
+...
 
 
 Option 2 : run piclodio with apache
@@ -104,6 +110,11 @@ and add this line at the end of the file
 ```
 www-data ALL=NOPASSWD:/usr/bin/mplayer* ,/usr/bin/pgrep mplayer ,/usr/bin/killall mplayer, /usr/bin/at
 ```
+
+Don't forget to place 'www-data' rights on the music-upload folder :
+...
+chown www-data:www-data -R /srv/fichiers/music/
+...
 
 That's it! Piclodio is now available on it IP adresse.
 
