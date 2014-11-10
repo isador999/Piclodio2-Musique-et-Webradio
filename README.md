@@ -11,8 +11,11 @@ Since 10/11/2014, this features perfectly works !
 
 Please contact me if you detect some bugs/errors, or if you have some ideas to improve this program :) 
 
+= =
+= =
 
-=== ORIGINAL README INSTALLATION ===
+= =
+
 
 
 Piclodio2
