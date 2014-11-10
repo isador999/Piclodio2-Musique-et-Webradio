@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <!-- Head -->
+  {% include 'head.html' %}
+  <body>
+    <!-- Navbar -->
+    {% with "Debug" as namepage  %}
+        {% include 'navbar.html' %}
+    {% endwith %}
+
+    <div class="container">
+         <fieldset class="scheduler-border">
+            <legend class="scheduler-border">Crontab debug</legend>
+
+        </fieldset >
+    </div>
+
+  </body>
+</html>

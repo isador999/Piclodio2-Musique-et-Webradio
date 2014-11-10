@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <!-- Head -->
+    {% include 'head.html' %}
+    <body>
+       <!-- Navbar -->
+        {% with "Option" as namepage  %}
+            {% include 'navbar.html' %}
+        {% endwith %}
+
+
+
+	<div class="container">	
+		<fieldset class="scheduler-border">
+		<legend class="scheduler-border">  <strong><div align="center" id="clock">Current Time {{currentTime}}</div></strong> <p align="left"> Set Manually Reveil Time !</p> </legend>
+<!--		<h3>Current Time : <span class="label label-primary"> {{ currentTime }} </span>		-->
+
+		<form class="form-horizontal" role="form">
+			<div class="form-group">
+			<label for="time" class="col-sm-offset-0 col-sm-1">Hour :</label>
+				<div class="row">
+					<div class="col-xs-2">
+						<select id="setHour" class="form-control">
+							{% for i in rangeHour %}
+                                  			    <option value="{{ i }}">
+                                        			{% if i < 10 %}
+                                            				0{{i}}
+                                        			{% else %}
+                                        				 {{i}}
+                                        			{% endif %}
+                                    			    </option>
+                                			{% endfor %}
+
+						</select>
+					</div>
+				</div>
+
+
+
+
+			</div>
+			<div class="form-group">
+			<label for="minutes" class="col-sm-offset-0 col-sm-1">Minutes :</label>
+				 <div class="row">
+                                        <div class="col-xs-2">
+                                                <select id="setMinute" class="form-control">
+                                                        {% for i in rangeMinute %}
+                                                            <option value="{{ i }}">
+                                                                {% if i < 10 %}
+                                                                        0{{i}}
+                                                                {% else %}
+                                                                         {{i}}
+                                                                {% endif %}
+                                                            </option>
+                                                        {% endfor %}
+
+                                                </select>
+                                        </div>
+                                </div>
+			</div>
+		</form>
+		</fieldset>
+
+
+
+		<div class="form-group">
+		    <fieldset class="scheduler-border">
+			<div class="btn-group btn-group-lg btn-group-justified" style="margin-bottom:15px;">
+                                   <a onclick="saveTime()" class="btn btn-primary">Save <span class="glyphicon glyphicon-time"></span></a>
+                    	</div>
+        	</div>
+	</div>
+
+
+	<br>
+	<br>
+
+       <div class="container">
+            <fieldset class="scheduler-border">
+                <legend class="scheduler-border">Volume</legend>
+		<h3>Current volume value : <span class="label label-primary"> {{ currentVolume }} </span> </h3>
+        <div class="btn-group btn-group-lg btn-group-justified" style="margin-bottom:15px;">
+            {% if currentMute == "on" %}
+                <a href="{% url 'webgui.views.volumetmute' %}" class="btn btn-danger">Mute {{ currentMute }} <span class="glyphicon glyphicon-volume-off"></span></a>
+            {% else %}
+                <a href="{% url 'webgui.views.volumetmute' %}" class="btn btn-primary">Mute {{ currentMute }} <span class="glyphicon glyphicon-volume-up"></span></a>
+            {% endif %}
+
+	</div>
+   		<div class="btn-group btn-group-lg btn-group-justified" style="margin-bottom:15px;">
+		  <a href="{% url 'webgui.views.volumeset' '20'%}" class="btn btn-default">20 %</a>
+ 		  <a href="{% url 'webgui.views.volumeset' '40'%}" class="btn btn-default">40 %</a>
+		  <a href="{% url 'webgui.views.volumeset' '60'%}" class="btn btn-default">60 %</a>
+		  <a href="{% url 'webgui.views.volumeset' '80'%}" class="btn btn-default">80 %</a>
+		  <a href="{% url 'webgui.views.volumeset' '100'%}" class="btn btn-default">100 %</a>
+		</div>
+   		<div class="btn-group btn-group-lg btn-group-justified" style="margin-bottom:15px;">
+		  <a href="{% url 'webgui.views.volumedown' '5'%}" class="btn btn-default"><span class="glyphicon glyphicon-volume-down"></span></a>
+ 		  <a href="{% url 'webgui.views.volumeup' '5'%}" class="btn btn-default"><span class="glyphicon glyphicon-volume-up"></span></a>
+		</div>
+           </fieldset >
+       </div>
+   
+       <br>
+       <br>
+       <br>
+
+    </body>
+</html>
+
+
+

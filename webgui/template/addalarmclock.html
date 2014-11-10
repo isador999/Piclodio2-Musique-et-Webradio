@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <!-- Head -->
+    {% include 'head.html' %}
+  <body>
+    <!-- Navbar -->
+    {% with "Add alarm clock" as namepage  %}
+        {% include 'navbar.html' %}
+    {% endwith %}
+    
+    <div class="container">
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border">New alarm clock</legend>
+            <div id="message" class="alert alert-danger"></div>
+            <form class="form-horizontal" role="form">
+                <!-- Label -->
+                <div class="form-group">
+                    <label for="label" class="col-sm-2 control-label">Label</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="label" placeholder="Label name">
+                    </div>
+                    
+                </div>
+                
+                <!-- Set hour and minute -->
+                <div class="form-group">
+                    <label for="time" class="col-sm-2 control-label">Time</label>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <select id="hour" class="form-control">
+                                {% for i in rangeHour %}
+                                    <option value="{{ i }}">
+                                        {% if i < 10 %}
+                                            0{{i}}
+                                        {% else %}
+                                            {{i}}
+                                        {% endif %}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-xs-2">
+                            <select id="minute" class="form-control">
+                                {% for i in rangeMinute %}
+                                    <option value="{{ i }}">
+                                        {% if i < 10 %}
+                                            0{{i}}
+                                        {% else %}
+                                            {{i}}
+                                        {% endif %}
+                                    </option>
+                                {% endfor %}
+                             </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Set day of week -->
+                <div class="form-group">
+                    <label for="time" class="col-sm-2 control-label">Day of week</label>
+                    <div class="col-sm-10">
+                        <button id="moButton" onclick="dayClicked('moButton')" type="button" style="width: 50px" class="btn btn-default">Mo</button>
+                        <button id="tuButton" onclick="dayClicked('tuButton')" type="button" style="width: 50px" class="btn btn-default">Tu</button>
+                        <button id="weButton" onclick="dayClicked('weButton')" type="button" style="width: 50px" class="btn btn-default">We</button>
+                        <button id="thButton" onclick="dayClicked('thButton')" type="button" style="width: 50px" class="btn btn-default">Th</button>
+                        <button id="frButton" onclick="dayClicked('frButton')" type="button" style="width: 50px" class="btn btn-default">Fr</button>
+                        <button id="saButton" onclick="dayClicked('saButton')" type="button" style="width: 50px" class="btn btn-default">Sa</button>
+                        <button id="suButton" onclick="dayClicked('suButton')" type="button" style="width: 50px" class="btn btn-default">Su</button>
+                    </div>
+                </div>
+                
+		<div class="form-group">
+		    <label for="time" class="col-sm-2 control-label">Mode</label>
+		    <div class="col-sm-10">
+		    	<button id="music" onclick="modeClicked('music')" type="button" style="width: 100px" class="btn btn-default">Music</button>
+			<button id="radio" onclick="modeClicked('radio')" type="button" style="width: 100px" class="btn btn-default">Radio</button>
+		    </div>
+		</div>
+
+		
+                <!-- Set web radio -->
+                <div class="form-group">
+                    <label for="time" class="col-sm-2 control-label">Web radio</label>
+                    <div class="col-sm-4">
+                        <select id="webradio" class="form-control">
+                                {% for radio in listradio %}
+                                    <option value="{{radio.id}}">{{radio.name }}</option>
+                                {% endfor %} 
+                        </select>
+                    </div>
+                    
+                </div>
+
+                <!-- Automatic put off -->
+                <div class="form-group">
+                    <label for="time" class="col-sm-2 control-label">Auto stop</label> 
+                    <div class="col-sm-1">
+                       <select id="snooze" class="form-control">
+                            {% for i in rangeSnooze %}
+                                <option value="{{ i }}">
+                                    {% if i < 10 %}
+                                        0{{i}}
+                                    {% else %}
+                                        {{i}}
+                                    {% endif %} 
+                                </option>
+                            {% endfor %}
+                       </select>
+                    </div>
+                </div>
+ 
+            </form>
+            <div class="form-group">
+                <div class="col-sm-offset-1 col-sm-1">
+                    <button onclick="goAddAlarmClock()" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+            
+        </fieldset > 
+           
+    </div>
+    
+  </body>
+</html>

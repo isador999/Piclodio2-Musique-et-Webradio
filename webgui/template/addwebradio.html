@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <!-- Head -->
+  {% include 'head.html' %}
+  <body>
+    <!-- Navbar -->
+    {% with "Add web radio" as namepage  %}
+        {% include 'navbar.html' %}
+    {% endwith %}
+    
+    <div class="container">
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border">New web radio</legend>
+            <form role="form" action="{% url 'webgui.views.addwebradio' %}" method="post">{% csrf_token %}
+                  {{ form.non_field_errors }}
+                  <div class="form-group">
+                    {{ form.subject.errors }}  
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" name ="name"id="name" placeholder="My Radio">
+                  </div>
+                  <div class="form-group">
+                    {{ form.subject.errors }}  
+                    <label for="url">URL</label>
+                    <input type="text" name="url" class="form-control" id="url" placeholder="http://url.example">
+                  </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+        </fieldset >   
+
+    </div>
+
+   <br> <br>
+
+   <div class="container">
+      <strong> Radio Streams can be found here : <a href="http://wiki.secondlife.com/wiki/Music_streams"><u> Music Stream </u></a></strong>
+   </div> 
+  </body>
+</html>

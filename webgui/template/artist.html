@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <!-- Head -->
+  {% include 'head.html' %}
+
+
+  <body>
+    <!-- Navbar -->
+    {% with "Artists List" as namepage  %}
+        {% include 'navbar.html' %}
+    {% endwith %}
+    
+    {% if save %}
+	<p> Artiste ajoute avec succes ! </p>
+    {% endif %}
+
+    <div class="container">
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border">Add new artists</legend>
+
+	    <form role="form" action="{% url 'webgui.views.artist' %}" method="post" >{% csrf_token %}
+
+                  <div class="form-group">
+                    <label for="artist">Artist</label>
+                    <input type="text" class="form-control" name ="name"id="name" placeholder="Example : Portishead">
+                  </div>
+
+
+
+		  <div class="form-group">
+		    <label for="style">Music Style (facultative)</label>
+		    <input type="text" class="form-control" name="style" id="style" placeholder="Example : Trip Hop">
+		  </div>
+
+
+		  <button type="submit" class="btn btn-primary">Add</button>             
+            </form>
+        </fieldset >
+    </div>
+	<br>
+	<br>
+	<br>
+    <div class="container">
+	<fieldset class="scheduler-border">
+	  <table class="table">
+	    <thead>
+                    <tr>
+                        <th>Artist</th>
+                        <th>Music Style</th>
+                        <th>Music Files</th>
+                        <th>Delete Artist</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for artist in listartist %}
+                        <tr>
+                            <th>
+                                {{ artist.name }}
+                            </th>
+                            <th>
+                                {{ artist.style }}
+                            </th>
+
+                            <th>
+                               <a href="{% url 'webgui.views.music' artist.id %}" style="margin-bottom: 3px" type="button" class="btn btn-primary btn-sm">
+                                    <span class="glyphicon glyphicon-music"></span>
+                               </a>
+				&nbsp &nbsp {{ artist.music_set.count }}
+                            </th>	
+                            <th>
+                                <a href="{% url 'webgui.views.delartist' artist.id %}"style="margin-bottom: 3px" type="button" class="btn btn-danger btn-sm">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </a>
+                            </th>
+                        </tr>
+                    {% empty %}
+                    <p>No artist yet. </p>
+                    {% endfor %}
+                </tbody>
+	  </table>
+    </div>
+    
+  </body>
+</html>

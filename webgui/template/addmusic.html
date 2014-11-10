@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <!-- Head -->
+  {% include 'head.html' %}
+
+  {% load upload_tags %}
+
+  <head>
+    <meta charset="utf-8">
+    <title>Django Jquery File Upload Example</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Bootstrap CSS Toolkit styles -->
+    <link rel="stylesheet" href="{{ STATIC_URL }}dist/css/bootstrap.min.css">
+    <!-- Bootstrap CSS Toolkit styles -->
+<!--    <link rel="stylesheet" href="{{ STATIC_URL }}dist/css/bootstrap.min-upload.css">	-->
+    <!-- Generic page styles -->
+<!--    <link rel="stylesheet" href="{{ STATIC_URL }}dist/css/style.css">	-->
+    <!-- Bootstrap styles for responsive website layout, supporting different screen sizes -->
+    <link rel="stylesheet" href="{{ STATIC_URL }}dist/css/bootstrap-responsive.min.css">
+    <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+    <link rel="stylesheet" href="{{ STATIC_URL }}dist/css/bootstrap-image-gallery.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}dist/css/jquery.fileupload-ui.css">
+    <!-- Shim to make HTML5 elements usable in older Internet Explorer versions -->
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  </head>
+
+
+
+  <body>
+    <!-- Navbar -->
+    {% with "Add Your Music" as namepage  %}
+        {% include 'navbar.html' %}
+    {% endwith %}
+    
+    {% if save %}
+	<p> Musique enregistree !!! </p>
+    {% endif %}
+
+    <div class="container">
+        <fieldset class="scheduler-border">
+	    <legend class="scheduler-border"><a href="{% url 'webgui.views.music' artist.id %}" style="margin-bottom: 3px" type="button" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-arrow-left"></span></a> Return to {{ artist.name }} musics </legend>
+	    <br>
+	    <br>
+            <legend class="scheduler-border"> Add {{ artist.name }} files (mp3, wav)</legend>
+
+	    <form id="fileupload" method="post" action="{% url 'webgui.views.multiple_uploader' artist.id %}" enctype="multipart/form-data">{% csrf_token %}
+
+		<div class="row fileupload-buttonbar">
+                    <div class="span7">
+                        <span class="btn btn-primary fileinput-button">
+                            <i class="icon-plus icon-white"></i>
+                            <span>Add files...</span>
+                            <input type="file" name="file" multiple>
+                        </span>
+                        <button type="submit" class="btn btn-success start">
+                            <i class="icon-upload icon-white"></i>
+                            <span>Start upload</span>
+                        </button>
+<!--                        <button type="reset" class="btn btn-warning cancel">
+                            <i class="icon-ban-circle icon-white"></i>
+                            <span>Cancel upload</span>
+                        </button>		-->
+                    </div>
+                    <div class="span5 fileupload-progress fade">
+                            <div class="progress progress-success progres-striped active">
+                                <div class="bar" style="width:0%"></div>
+                            </div>
+                        <div class="progress-extended">&nbsp;</div>
+                    </div>
+                </div>
+                <div class="fileupload-loading"></div>
+                <table class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody></table>
+
+		<div class="fileupload-content">
+            	<table class="files"></table>
+            	    <div class="fileupload-progressbar"></div>
+        	</div>
+
+<!--		<div>
+		    <button type="submit" class="btn btn-primary">Add</button>             
+		</div>		-->
+            </form>
+        </fieldset >   
+
+    {% upload_js %}
+
+    <script src="{{ STATIC_URL }}jquery.min.js"></script>
+    <script src="{{ STATIC_URL }}jquery.ui.widget.js"></script>
+    <script src="{{ STATIC_URL }}tmpl.min.js"></script>
+    <script src="{{ STATIC_URL }}load-image.min.js"></script>
+    <script src="{{ STATIC_URL }}canvas-to-blob.min.js"></script>
+    <script src="{{ STATIC_URL }}bootstrap.min.js"></script>
+    <script src="{{ STATIC_URL }}bootstrap-image-gallery.min.js"></script>
+    <script src="{{ STATIC_URL }}jquery.iframe-transport.js"></script>
+    <script src="{{ STATIC_URL }}jquery.fileupload.js"></script>
+    <script src="{{ STATIC_URL }}jquery.fileupload-fp.js"></script>
+    <script src="{{ STATIC_URL }}jquery.fileupload-ui.js"></script>
+    <script src="{{ STATIC_URL }}locale.js"></script>
+    <script src="{{ STATIC_URL }}main.js"></script> 
+    </div>
+    
+  </body>
+</html>

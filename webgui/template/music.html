@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <!-- Head -->
+  {% include 'head.html' %}
+  <body>
+    <!-- Navbar -->
+    {% with " Music Files " as namepage  %}
+        {% include 'navbar.html' %}
+    {% endwith %}
+    
+    <div class="container">
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border"><a href="{% url 'webgui.views.addmusic' artist.id %}" style="margin-bottom: 3px" type="button" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span></a>  {{ artist.name }} Music </legend>
+            <!-- list of saved web radio -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Music File</th>
+                        <th>Play</th>
+                        <th>Delete</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for music in listmusic %}  
+                        <tr>
+                            <th>
+                                {{ music.name }}
+                            </th>  
+		            <th>
+                               <a href="{% url 'webgui.views.playmusic' music.id %}" style="margin-bottom: 3px" type="button" class="btn btn-primary btn-sm">
+                                    <span class="glyphicon glyphicon-play"></span>
+                               </a> 
+                            </th>
+                            <th>
+                                <a href="{% url 'delmusic' music.id %}"style="margin-bottom: 3px" type="button" class="btn btn-danger btn-sm">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </a>
+                            </th>
+                        </tr>
+                    {% empty %}
+                    <p>No Music yet. </p>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </fieldset >   
+           
+    </div>
+    
+  </body>
+</html>
