@@ -44,6 +44,7 @@ sudo apt-get install mplayer at sqlite3
 
 Create the following folders (needed to use the music upload)
 ...
+
 sudo mkdir -p /srv/fichiers/music/
 ...
 
