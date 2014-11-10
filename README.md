@@ -1,3 +1,20 @@
+The initial program was '1.3-dev' version from this page : https://github.com/Sispheor/Piclodio2.
+
+I forked this project to add some features : 
+  - Play a music randomly selected. 
+  - Set an alarm and choose the mode (Webradio / Music randomly selected). 
+  - Create or delete artists. 
+  - Upload or delete some music associated to an artist. 
+  
+
+Since 10/11/2014, this features perfectly works !
+
+Please contact me if you detect some bugs/errors, or if you have some ideas to improve this program :) 
+
+
+=== ORIGINAL README INSTALLATION ===
+
+
 Piclodio2
 =========
 
