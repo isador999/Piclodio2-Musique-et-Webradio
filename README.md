@@ -47,7 +47,7 @@ git clone https://github.com/isador999/Piclodio2-Musique-et-Webradio.git
 mv Piclodio2-Musique-et-Webradio Piclodio2
 ```
 
-You need then to create the destination music files folder and pi user must be owner.
+You need then to create the destination folder for the music files, and pi user must be owner.
 ```
 mkdir /srv/fichiers/
 chown -R pi:pi /srv/fichiers/
