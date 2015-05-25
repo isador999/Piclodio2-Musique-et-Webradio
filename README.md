@@ -9,10 +9,13 @@ I forked this program from Sispheor to add the following features :
  - Set the system time manually. 
 
 __Next Steps__ : 
-In the next version of this program, by clicking on "Play Music Randomly" on the home page, I want to be able to listen an infinite number of music files randomly selected.  Now, clicking on "Play Music randomly" will launch a Mplayer process for only one music.  The problem is that the browser will not be notified when the music is finished. 
+In the next version of this program, by clicking on "Play Music Randomly" on the home page, I want to be able to listen an infinite number of music files randomly selected.  
+Now, clicking on "Play Music randomly" will launch a Mplayer process for only one music and return the selected music on the web UI. 
+The main problem is that the web UI isn't notified when the music is finished, so the page will not be reloaded. 
 So, I think a Websocket mecanism is needed to have real-time notifications between Mplayer and GUI components. 
 
 Feel free to fork, improve, or help me ;) 
+
 
 Installation
 =========== 
