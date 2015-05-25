@@ -42,7 +42,8 @@ sudo pip install Django==1.7.7
 Clone the project. Notice we didn't use sudo here. The folder has to belong to the Pi user.
 ```
 cd /home/pi
-git clone https://github.com/Sispheor/Piclodio2.git
+git clone https://github.com/isador999/Piclodio2-Musique-et-Webradio.git
+mv Piclodio2-Musique-et-Webradio Piclodio2
 ```
 
 Option 1 : Use Django's server to run piclodio
