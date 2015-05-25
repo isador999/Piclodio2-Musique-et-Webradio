@@ -1,5 +1,19 @@
-Piclodio2
-=========
+  Piclodio2 Music & Webradio
+==============================
+
+I forked this program from Sispheor to add the following features : 
+
+ - Upload/Delete/Play music files on the Raspberry. 
+ - You can now choose 'Webradio' or 'Music' when you create your AlarmClock. 
+ - When a music AlarmClock is launched, music will be selected randomly in the music database.
+ - Set the system time manually. 
+
+__Next Steps__ : 
+In the next version of this program, by clicking on "Play Music Randomly" on the home page, I want to be able to listen an infinite number of music files randomly selected.  Now, clicking on "Play Music randomly" will launch a Mplayer process for only one music.  The problem is that the browser will not be notified when the music is finished. 
+So, I think a Websocket mecanism is needed to have real-time notifications between Mplayer and GUI components. 
+
+Feel free to fork, improve, or help me ;) 
+
 
 Piclodio2 is a web radio player and a also an alarm clock. You can add url stream to complete the collection. Scheduling alarm clock is easy and can be periodic.
 
@@ -44,7 +58,7 @@ Start piclodio :
 ```
 sudo /etc/init.d/piclodio start
 ```
-That's it, you can now access your piclodio at http://youip:8000
+That's it, you can now access your piclodio at http://yourip:8000
 
 
 Option 2 : Run Piclodio with apache
