@@ -1,18 +1,3 @@
-The initial program was '1.3-dev' version from this page : https://github.com/Sispheor/Piclodio2.
-
-I forked this project to add some features : 
-  - Play a music randomly selected. 
-  - Set an alarm and choose the mode (Webradio / Music randomly selected). 
-  - Create or delete artists. 
-  - Upload or delete music(s) associated to an artist. 
-  
-
-Since 10/11/2014, this features perfectly works !
-
-Please contact me if you detect some bugs/errors, or if you have some ideas to improve this program :) 
-
-
-
 Piclodio2
 =========
 
@@ -23,88 +8,64 @@ Piclodio2 is a web radio player and a also an alarm clock. You can add url strea
 Prerequisites
 ==========
 
-Django Framework
+**pip** for python dependencies, **Mplayer** to play stream, **at** to stop alarm clock automatically, **sqlite3** to store data, **git** to clone the project and **python-alsaaudio** to manage sound
 
 ```
-sudo pip install Django==1.6
+sudo apt-get install python-pip mplayer at sqlite3 git python-alsaaudio
 ```
 
-or
+Install Django framework from pip
 
 ```
-wget https://www.djangoproject.com/download/1.6/tarball/
-tar xzf Django-1.6.tar.gz
-sudo python setup.py install
+sudo pip install Django==1.7.7
 ```
 
-Mplayer, At, SQLite database, the web server and python module
+Clone the project. Notice we didn't use sudo here. The folder has to belong to the Pi user.
 ```
-sudo apt-get install mplayer at sqlite3
+cd /home/pi
+git clone https://github.com/Sispheor/Piclodio2.git
 ```
 
-Create the following folders (needed to use the music upload) : 
-
-<code> 
-sudo mkdir -p /srv/fichiers/music/
-</code>
-
-
-
-Option 1 : use django's server to run piclodio
+Option 1 : Use Django's server to run piclodio
 ==========
 
 It's not the best practice but it's easy and fast.
 
 As pi user :
 
-Get Piclodio
+Copy the init script
 ```
-cd /home/pi
-git clone https://github.com/isador999/Piclodio2-Musique-et-Webradio.git
-```
-Copy the starter script
-```
-sudo cp Piclodio2/init_script/piclodio.sh /etc/init.d/piclodio
+sudo cp Piclodio2/run_piclodio/init_script/piclodio.sh /etc/init.d/piclodio
 sudo chmod +x /etc/init.d/piclodio
 sudo update-rc.d piclodio defaults
 ```
-You can edit the file if you want to customise settings
+You can edit it to customise settings
 Start piclodio :
 ```
 sudo /etc/init.d/piclodio start
 ```
 That's it, you can now access your piclodio at http://youip:8000
 
-Don't forget to place 'PI' rights on the music-upload folder : 
 
-<code> 
-sudo chown pi:pi -R /srv/fichiers/music/ 
-</code>
-
-
-
-Option 2 : run piclodio with apache
+Option 2 : Run Piclodio with apache
 ==========
 
 Prerequisites
 ```
 sudo apt-get install apache2 libapache2-mod-wsgi
 ```
-
-Clone Piclodio application from github into apache document root directory
+Move Piclodio in default apache directory and give access
 ```
-cd /var/www
-git clone https://github.com/Sispheor/Piclodio2.git
+sudo mv /home/pi/Piclodio2 /var/www
+sudo chown -R www-data: /var/www/Piclodio2
 ```
-
 Copy vHost from sources folder into apache vHost configuration folder
 ```
-cp /var/www/Piclodio2/apache.piclodio.conf /etc/apache2/sites-available/
+sudo cp /var/www/Piclodio2/run_piclodio/apache/piclodio.conf /etc/apache2/sites-available/piclodio
 ```
-
 Enable the vHost
 ```
-a2ensite piclodio
+sudo a2ensite piclodio
 ```
 And last, we have to allow the Apache user www-data to use mplayer. Edit the sudoers file with the command
 ```
@@ -114,14 +75,13 @@ and add this line at the end of the file
 ```
 www-data ALL=NOPASSWD:/usr/bin/mplayer* ,/usr/bin/pgrep mplayer ,/usr/bin/killall mplayer, /usr/bin/at
 ```
+Add Apache user to audio group to allow him to control sound
+```
+sudo usermod -a -G audio www-data
+```
+Reload Apache
+```
+sudo service apache2 reload
+```
 
-Don't forget to place 'www-data' rights on the music-upload folder :
-
-<code> 
-chown www-data:www-data -R /srv/fichiers/music/ 
-</code>
-
-
-That's it! Piclodio is now available on it IP adresse.
-
-==========
+That's it! Piclodio is now available on it IP address on **http://RPI_IP_ADDRESS/piclodio**

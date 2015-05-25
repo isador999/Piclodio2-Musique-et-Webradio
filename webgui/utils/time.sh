@@ -23,7 +23,7 @@ case $1 in
                 exit
                 ;;
         --set)
-		date -s $2:$3
+                date -s $2:$3
                 exit
                 ;;
 esac
@@ -33,3 +33,4 @@ echo ""
 echo "Help :"
 usage
 exit
+

@@ -10,8 +10,9 @@
     
     <div class="container">
          <fieldset class="scheduler-border">
-            <legend class="scheduler-border"><a href="{% url 'webgui.views.addalarmclock' %}" style="margin-bottom: 3px" type="button" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span></a>  Alarm clock</legend>
+            <legend class="scheduler-border"><a href="{% url 'webgui.views.create_alarmclock' %}" style="margin-bottom: 3px" type="button" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span></a>  Alarm clock</legend>
             <!-- list of saved web radio -->
+
             <table class="table">
                 <thead>
                     <tr>
@@ -20,6 +21,7 @@
                         <th>Time</th>
                         <th>Mode</th>
                         <th>Play</th>
+                        <th>Edit</th>
                         <th>Active</th>
                         <th>Delete</th>
                     </tr>
@@ -54,15 +56,22 @@
                                 {% endif %}
                                 
                             </th>
-			    <th>
-			        {{alarmclock.mode}}
-			    </th>
                             <th>
-			    {% if alarmclock.mode == "music" %}
-				Random Choice :)
-			    {% else %}
+                                <!-- {{alarmclock.webradio.name}}  -->
+                                {{alarmclock.mode}}
+                            </th>
+			    <th>
+                            {% if alarmclock.mode == "music" %}
+                                Random Choice :)
+                            {% else %}
                                 {{alarmclock.webradio.name}}
-			    {% endif %}
+                            {% endif %}
+                            </th>
+
+                            <th>
+                               <a href="{% url 'webgui.views.update_alarmclock' alarmclock.id %}" style="margin-bottom: 3px" type="button" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-edit"></span>
+                               </a>
                             </th>
                             <th>
                                 <a href="{% url 'webgui.views.activeAlarmClock' alarmclock.id %}"style="margin-bottom: 3px" type="button" class="btn btn-{% if alarmclock.active == True %}primary{% else %}default{% endif %} btn-sm">
@@ -76,7 +85,7 @@
                             </th>
                         </tr>
                     {% empty %}
-                        <p class="lead text-primary">No alarm clock setted yet. </p>
+                        <p class="lead text-primary">No alarm clock set yet.</p>
                     {% endfor %}
                 </tbody>
             </table>

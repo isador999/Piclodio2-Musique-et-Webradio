@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <!-- Head -->
+    {% include 'head.html' %}
+    <body>
+       <!-- Navbar -->
+        {% with "Time Settings" as namepage  %}
+            {% include 'navbar.html' %}
+        {% endwith %}
+
+
+       <div class="container">
+	<div class="page-header">
+                <legend class="scheduler-border">  <strong><div align="center" id="clock">Current Time {{current_time}}</div></strong> </legend>
+          <h3>Set Manually Time !</h3>
+        </div>
+
+        {% if form.errors %}
+            <div class="alert alert-danger" role="alert">
+                {% for field in form %}
+                    {% if field.errors %}
+                    <li><strong>{{ field.label }}:</strong> {{ field.errors|striptags }}</li>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+        <form class="form-horizontal" action="{% url 'webgui.views.timeset' %}" method="post">{% csrf_token %}
+
+            {% for field in form %}
+                <div class="form-group {% if field.errors %}has-error{% endif %}">
+                    <label for="{{field.name}}" class="col-sm-2 control-label">
+                        {{ field.label }}
+                    </label>
+                    <div class="col-sm-4">
+                        {{ field }}
+                    </div>
+                </div>
+            {% endfor %}
+
+	    <br/>
+	    <button class="btn btn-success" type="submit">
+                <span class="glyphicon glyphicon-time"></span>
+               Save Time
+            </button>
+
+         </form>
+
+
+	<br/>
+
+       </div>   
+    </body>
+</html>

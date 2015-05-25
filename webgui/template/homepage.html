@@ -12,11 +12,11 @@
     
     <div class="container">
         <fieldset class="scheduler-border">
-            <legend class="scheduler-border"><a href="{% url 'webgui.views.homepage' %}" style="margin-bottom: 3px" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-refresh"></span></a> Date & Time</legend>
+            <legend class="scheduler-border"><a href="{% url 'webgui.views.homepage' %}" style="margin-bottom: 3px" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-refresh"></span></a>  Rpi date and time</legend>
             <div style="text-align: center">
-                <strong class="text-primary"><div id="clock">{{ clock }} </div></strong>
+                <strong class="text-primary"><div id="clock">{{ clock }}</div></strong>
             </div>
-            <div style="text-align: center">
+	    <div style="text-align: center">
                 <strong class="text-primary"><div id="clock">{{ date }} </div></strong>
             </div>
         </fieldset>
@@ -72,16 +72,15 @@
             <p style="text-align: center;"class="lead {% if player.status == True %}text-primary{% endif %}">{{radio.name}}</p>
             {% if radio != None  %}
                 <div class="btn-group btn-group-justified" style="margin-bottom: 20px">
-                    <a href="{% url 'webgui.views.play' radio.id %}" id="play" class="btn btn-{% if player.status == True %}primary{% else %}default{% endif %} btn-lg">Play Webradio</a>
+                    <a href="{% url 'webgui.views.play' radio.id %}" id="play" class="btn btn-{% if player.status == True %}primary{% else %}default{% endif %} btn-lg">Play</a>
                     <a href="{% url 'webgui.views.stop'  %}" id="stop" class="btn btn-{% if player.status == False %}primary{% else %}default{% endif %} btn-lg">Stop</a>
                 </div>
             {% endif %}  
         </fieldset>    
 
 
-        <fieldset class="scheduler-border">
 
-
+	<fieldset class="scheduler-border">
 
             <legend class="scheduler-border"><a href="{% url 'webgui.views.artist' %}" style="margin-bottom: 3px" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-cog"></span></a>  Artists & Music </legend>
             <p style="text-align: center;"class="lead {% if player.status == True %}text-primary{% endif %}"><u><b> Artist </b></u>: {{ artist.name }} / <u><b> Track </b></u>: {{music.name}}</p>
@@ -89,7 +88,7 @@
                     <a href="{% url 'webgui.views.playmusicrandom' %}" id="play" class="btn btn-{% if player.status == True %}primary{% else %}default{% endif %} btn-lg">Play Music (randomly)</a>
                     <a href="{% url 'webgui.views.stop' %}" id="stop" class="btn btn-{% if player.status == False %}primary{% else %}default{% endif %} btn-lg">Stop</a>
                 </div>
-        </fieldset>    
+        </fieldset>
 
 
     </div>

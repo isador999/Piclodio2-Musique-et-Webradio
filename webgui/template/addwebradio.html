@@ -9,30 +9,44 @@
     {% endwith %}
     
     <div class="container">
-        <fieldset class="scheduler-border">
-            <legend class="scheduler-border">New web radio</legend>
-            <form role="form" action="{% url 'webgui.views.addwebradio' %}" method="post">{% csrf_token %}
-                  {{ form.non_field_errors }}
-                  <div class="form-group">
-                    {{ form.subject.errors }}  
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" name ="name"id="name" placeholder="My Radio">
-                  </div>
-                  <div class="form-group">
-                    {{ form.subject.errors }}  
-                    <label for="url">URL</label>
-                    <input type="text" name="url" class="form-control" id="url" placeholder="http://url.example">
-                  </div>
-                <button type="submit" class="btn btn-primary">Add</button>
-            </form>
-        </fieldset >   
+        <div class="page-header">
+          <h1>Add new web radio</h1>
+        </div>
 
+        {% if form.errors %}
+            <div class="alert alert-danger" role="alert">
+                {% for field in form %}
+                    {% if field.errors %}
+                    <li><strong>{{ field.label }}:</strong> {{ field.errors|striptags }}</li>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+        <form class="form-horizontal" action="{% url 'webgui.views.addwebradio' %}" method="post">{% csrf_token %}
+
+            {% for field in form %}
+                <div class="form-group {% if field.errors %}has-error{% endif %}">
+                    <label for="{{field.name}}" class="col-sm-2 control-label">
+                        {{ field.label }}
+                    </label>
+                    <div class="col-sm-4">
+                        {{ field }}
+                    </div>
+                </div>
+            {% endfor %}
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <!-- validate button -->
+                    <button class="btn btn-success" type="submit">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        Add the webradio
+                    </button>
+
+                </div>
+            </div>
+        </form>
     </div>
-
-   <br> <br>
-
-   <div class="container">
-      <strong> Radio Streams can be found here : <a href="http://wiki.secondlife.com/wiki/Music_streams"><u> Music Stream </u></a></strong>
-   </div> 
+    
   </body>
 </html>

@@ -17,6 +17,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Play</th>
+                        <th>Edit</th>
                         <th>Delete</th>
                         
                     </tr>
@@ -33,13 +34,18 @@
                                </a>
                             </th>
                             <th>
-                                <a href="{% url 'webgui.views.deleteWebRadio' radio.id %}"style="margin-bottom: 3px" type="button" class="btn btn-danger btn-sm">
+                               <a href="{% url 'webgui.views.update_webradio' radio.id %}" style="margin-bottom: 3px" type="button" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-edit"></span>
+                               </a>
+                            </th>
+                            <th>
+                                <a href="{% url 'webgui.views.delete_web_radio' radio.id %}"style="margin-bottom: 3px" type="button" class="btn btn-danger btn-sm">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </a> 
                             </th>
                         </tr>
                     {% empty %}
-                    <p>No web radio yet. </p>
+                    <p>No web radio set yet. </p>
                     {% endfor %}
                 </tbody>
             </table>
