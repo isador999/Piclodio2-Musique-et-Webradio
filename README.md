@@ -22,7 +22,7 @@ Installation
 
 Piclodio2 is a web radio player and a also an alarm clock. You can add url stream to complete the collection. Scheduling alarm clock is easy and can be periodic.
 
-![alt tag](https://raw.github.com/Sispheor/Piclodio2/master/img/piclodio_home.png)
+![alt tag](https://raw.github.com/Sispheor/Piclodio2/master/img/piclodio_music_home.png)
 
 Prerequisites
 ==========
