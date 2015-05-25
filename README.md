@@ -14,6 +14,8 @@ So, I think a Websocket mecanism is needed to have real-time notifications betwe
 
 Feel free to fork, improve, or help me ;) 
 
+Installation
+=========== 
 
 Piclodio2 is a web radio player and a also an alarm clock. You can add url stream to complete the collection. Scheduling alarm clock is easy and can be periodic.
 
